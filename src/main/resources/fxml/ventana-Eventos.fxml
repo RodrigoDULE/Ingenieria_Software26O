@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+
+    <children>
+
+        <!-- Título -->
+        <Text layoutX="20.0" layoutY="40.0" text="Lista de Eventos">
+            <font>
+                <Font name="Ebrima Bold" size="26.0" />
+            </font>
+        </Text>
+
+        <Line endX="900.0" layoutY="60.0" startX="0.0" />
+
+        <!-- Botones -->
+        <Button fx:id="btnNuevoEvento" layoutX="216.0" layoutY="81.0" onAction="#abrirAgendarEvento" prefWidth="180.0" text="Agendar Evento" />
+
+        <Button fx:id="btnCalendario" layoutX="504.0" layoutY="81.0" onAction="#abrirCalendario" prefWidth="180.0" text="Calendario" />
+
+        <!-- Contenedor de eventos -->
+        <ScrollPane fitToWidth="true" layoutX="20.0" layoutY="130.0" prefHeight="450.0" prefWidth="860.0">
+            <content>
+                <FlowPane fx:id="contenedorEventos" hgap="15" prefWidth="820" prefWrapLength="820" vgap="15" />
+            </content>
+        </ScrollPane>
+
+    </children>
+
+</Pane>

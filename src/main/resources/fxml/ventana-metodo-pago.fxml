@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane prefHeight="450" prefWidth="400" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+
+    <VBox layoutX="80" layoutY="40" prefWidth="240" spacing="12">
+
+        <Label alignment="TOP_CENTER" prefHeight="27.0" prefWidth="242.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Información de pago" textAlignment="CENTER" />
+
+        <Label alignment="CENTER" prefHeight="18.0" prefWidth="268.0" text="Número de tarjeta:" textAlignment="CENTER" />
+        <TextField fx:id="numeroTarjeta" promptText="XXXX XXXX XXXX XXXX" />
+
+        <Label alignment="CENTER" prefHeight="18.0" prefWidth="256.0" text="Nombre en la tarjeta:" />
+        <TextField fx:id="nombreTarjeta" promptText="Nombre completo" />
+
+        <Label alignment="CENTER" prefHeight="18.0" prefWidth="243.0" text="Fecha de expiración:" />
+        <TextField fx:id="fechaExpiracion" promptText="MM/AA" />
+
+        <Label alignment="CENTER" prefHeight="18.0" prefWidth="294.0" text="CVV:" />
+        <TextField fx:id="cvv" promptText="123" />
+
+        <Button fx:id="btnPagar" onAction="#realizarPago" prefWidth="240" text="Pagar ahora" />
+
+    </VBox>
+
+</Pane>

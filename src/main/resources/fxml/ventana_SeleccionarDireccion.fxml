@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<!--
+  Pantalla "Seleccionar dirección de envío" de HU-05. Sirve tanto
+  para el caso vacío (solo aparece la tarjeta "Nueva Dirección" y el
+  botón Regresar) como para cuando ya hay direcciones (tarjetas +
+  botón Continuar al pago). VistaDireccionesEnvio decide qué mostrar
+  por código, no hay dos FXML distintos para esto.
+-->
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <VBox spacing="16" prefWidth="620">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <Text text="Seleccionar dirección de envío" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Label text="Elige a dónde quieres que enviemos tu pedido. Puedes añadir una nueva dirección si es necesario."
+               wrapText="true" style="-fx-text-fill: #666666;"/>
+
+        <!-- Las tarjetas (una por dirección guardada, más la de "Nueva
+             Dirección" que siempre aparece al final) se arman por
+             código en VistaDireccionesEnvio — mismo patrón que ya
+             usan en vistaCarritoPrincipal con contenedorProductoscarrito. -->
+        <FlowPane fx:id="contenedorDirecciones" hgap="16" vgap="16"/>
+
+        <Button fx:id="botonContinuarPago" text="Continuar al pago →" maxWidth="Infinity"
+                onAction="#handleContinuarPago" style="-fx-background-color: black; -fx-text-fill: white;"/>
+
+        <Button fx:id="botonRegresar" text="← Regresar" maxWidth="Infinity"
+                onAction="#handleRegresar" visible="false" managed="false"/>
+
+    </VBox>
+</ScrollPane>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="420.0"
+            prefHeight="220.0">
+    <children>
+        <VBox spacing="18.0" AnchorPane.topAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <HBox spacing="10">
+                <Label text="Fecha de envio de notificación"/>
+                <DatePicker fx:id="dpFecha" prefWidth="120"/>
+            </HBox>
+
+            <GridPane hgap="10" vgap="15">
+                <Label text="Enviar cada" GridPane.rowIndex="0"/>
+                <Spinner fx:id="spDias" prefWidth="60" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Días" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <ToggleButton fx:id="tgDias" prefWidth="55" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                <Label text="Enviar cada" GridPane.rowIndex="1"/>
+                <Spinner fx:id="spSemanas" prefWidth="60" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Semanas" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                <ToggleButton fx:id="tgSemanas" prefWidth="55" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="30">
+                <Button fx:id="btnGuardar" text="GUARDAR" prefWidth="100"/>
+                <Button fx:id="btnCancelar" text="CANCELAR" prefWidth="100"/>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>
