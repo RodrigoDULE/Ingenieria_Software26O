@@ -1,4 +1,4 @@
-# Proyecto Análisis y Diseño
+# Proyecto Ingenieria de Software
 
 Este proyecto es una aplicación JavaFX con Spring Boot que implementa un sistema de gestión de usuarios y grupos. Es un proyecto para el curso de Analisis y Diseño.
 
@@ -117,6 +117,6 @@ Este proyecto ha sido migrado de Spring Boot 2.7.3 a 3.2.12. Los principales cam
 
 ## Licencia
 
-Este proyecto es parte del curso de Análisis y Diseño de Software.
+Este proyecto es parte del curso de Ingenieria de Software.
 
 Contactar a Humberto Cervantes de la UAM Iztapalapa en hcm@xanum.uam.mx
