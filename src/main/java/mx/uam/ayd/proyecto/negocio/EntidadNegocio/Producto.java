@@ -1,11 +1,14 @@
 package mx.uam.ayd.proyecto.negocio.EntidadNegocio;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Producto {
@@ -21,6 +24,7 @@ public class Producto {
     private int contenidoMCL;
     private float GradoAlcohol;
     private String imagen;
+
 
 
     
@@ -40,14 +44,12 @@ public class Producto {
     @ManyToOne(targetEntity = Cliente.class, fetch = FetchType.EAGER)
     private Cliente cliente;
 
-
     //cardinalidad con evento
-
     @ManyToOne
     private Evento evento;
 
-
-
+    @OneToMany(mappedBy = "productoFK")
+    private List<DetallesCompra> detalleCompra;
 
     //realizamos getters
     public long getidProducto(){return idProducto;}
@@ -74,9 +76,12 @@ public class Producto {
     public void setcantidadStock(int CantidadStock){this.CantidadStock = CantidadStock;}
     public void setcontenidoMCL(int contenidoMCL){this.contenidoMCL = contenidoMCL;}
     public void setGradoAlcohol(float GradoAlcohol){ this.GradoAlcohol = GradoAlcohol;}
-    public void setGradoAlcohol(String tipoProd){ this.tipoProd = tipoProd;}
     public void setRutaImagen(String rutaImagen){ this.imagen = rutaImagen;}
     public void setTipoProd(String tipoProd){ this.tipoProd = tipoProd;}
+    public Evento getEvento(){return evento;}
+    public void setEvento(Evento evento){this.evento = evento;}
+    public List<DetallesCompra> getDetalleCompra(){return detalleCompra;}
+    public void setDetalleCompra(List<DetallesCompra> detalleCompra){this.detalleCompra = detalleCompra;}
 
 
     //generado **IA**

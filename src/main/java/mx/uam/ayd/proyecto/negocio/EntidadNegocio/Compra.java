@@ -1,11 +1,15 @@
 package mx.uam.ayd.proyecto.negocio.EntidadNegocio;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 
@@ -24,11 +28,17 @@ public class Compra{
     private float Monto;
     private String direccion;
     private LocalDate fecha;
+    private int totalProductos;
 
     @OneToOne(mappedBy = "compra")
     private carritoCompra carrito;
 
+    @OneToMany(mappedBy = "compraFK")
+    private List<DetallesCompra> detalleCompra;
 
+    @ManyToOne 
+    @JoinColumn (name = "clienteFK")
+    private Cliente clienteFK;
     // Constructors
 
     /**
@@ -124,6 +134,14 @@ public class Compra{
         this.fecha = fecha;
     }
 
+    public int getTotalProductos() {
+        return totalProductos;
+    }
+
+    public void setTotalProductos(int totalProductos) {
+        this.totalProductos = totalProductos;
+    }
+
     /**
      * Devuelve el carrito asociado a esta compra (lado inverso).
      *
@@ -140,6 +158,22 @@ public class Compra{
      */
     public void setCarrito(carritoCompra carrito){
         this.carrito = carrito;
+    }
+
+    public List<DetallesCompra> getDetalleCompra() {
+        return detalleCompra;
+    }
+
+    public void setDetalleCompra(List<DetallesCompra> detalleCompra) {
+        this.detalleCompra = detalleCompra;
+    }
+
+    public Cliente getClienteFK() {
+        return clienteFK;
+    }
+
+    public void setClienteFK(Cliente clienteFK) {
+        this.clienteFK = clienteFK;
     }
 
 }
