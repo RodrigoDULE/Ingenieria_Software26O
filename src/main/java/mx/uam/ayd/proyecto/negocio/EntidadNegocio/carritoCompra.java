@@ -46,8 +46,8 @@ public class carritoCompra {
     public int getCantidadTotalCompra() {return cantidadTotalCompra;}
     public float getTotalCalculado() {return totalCalculado;}
     public List<Producto> getProductoenCarrito(){return producto;}
-    public boolean getenvioGratis(){return envioGratis;}
-    public Compra getCompra(){return compra;}
+    public boolean getenvioGratis(){ validarEnvioGratis(); return envioGratis;}
+    public Compra getCompra(){ return compra;}
     //Creamos setters
     public void setIdCarrito(long idCarrito) {this.idCarrito = idCarrito;}
     public void setCantidadTotalCompra(int cantidadTotalCompra) {this.cantidadTotalCompra += cantidadTotalCompra; }//para que se vayan sumando a los demas producto que agregamos}

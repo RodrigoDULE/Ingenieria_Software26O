@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="651.0" styleClass="root-pane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="769.0" prefWidth="1004.0" styleClass="root-pane" stylesheets="@../css/estilos-mezicuil.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fill="#0e5121" fontSmoothingType="LCD" layoutX="25.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="MEZICUIL">
          <font>
@@ -29,19 +29,19 @@
             <RadioButton fx:id="boxComplementos" mnemonicParsing="false" onAction="#handlebuscarCriterio" text="Complementos" toggleGroup="$grupoFiltroCatalogo" />
          </children>
       </VBox>
-      <Line endX="-97.0" endY="276.0" layoutX="211.0" layoutY="141.0" startX="-97.0" startY="-77.0" stroke="#a1a0a0" />
-      <Line endX="543.0" layoutX="108.0" layoutY="58.0" startX="-114.5" stroke="#949191" />
-      <TextField fx:id="buscaProducto" layoutX="430.0" layoutY="20.0" styleClass="search-field" />
-      <Button id="botonBusca" layoutX="591.0" layoutY="18.0" mnemonicParsing="false" onAction="#handlebuscarCriterioBarra" styleClass="primary-button" text="OK" />
+      <Line endX="-97.0" endY="608.0" layoutX="211.0" layoutY="141.0" startX="-97.0" startY="-77.0" stroke="#a1a0a0" />
+      <Line endX="887.0" layoutX="108.0" layoutY="58.0" startX="-114.5" stroke="#949191" />
+      <TextField fx:id="buscaProducto" layoutX="785.0" layoutY="20.0" styleClass="search-field" />
+      <Button id="botonBusca" layoutX="947.0" layoutY="20.0" mnemonicParsing="false" onAction="#handlebuscarCriterioBarra" styleClass="primary-button" text="OK" />
       <Text fontSmoothingType="LCD" layoutX="25.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrar por: ">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Text>
-      <ScrollPane layoutX="122.0" layoutY="63.0" prefHeight="364.0" prefWidth="524.0" styleClass="panel-card">
+      <ScrollPane layoutX="122.0" layoutY="63.0" prefHeight="694.0" prefWidth="871.0" styleClass="panel-card">
          <content>
-            <FlowPane fx:id="contenedorProductos" hgap="12" prefHeight="359.0" prefWidth="519.0" vgap="12" />
+            <FlowPane fx:id="contenedorProductos" hgap="12" prefHeight="665.0" prefWidth="832.0" vgap="12" />
          </content>
       </ScrollPane>
-      <Button id="irCarrito" onAction="#handleIrCarrito" layoutX="154.0" layoutY="18.0" mnemonicParsing="false" styleClass="primary-button" text="Ir al carrito" />
+      <Button id="irCarrito" layoutX="154.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleIrCarrito" styleClass="primary-button" text="Ir al carrito" />
    </children>
 </Pane>

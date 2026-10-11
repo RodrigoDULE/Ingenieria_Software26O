@@ -1,0 +1,87 @@
+
+.root {
+    -fx-background-color: #F8F7F2; /* Color crema claro del fondo */
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    /* Sombra sutil para darle profundidad */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 15, 0, 0, 4);
+    -fx-padding: 24px;
+}
+
+.titulo-principal {
+    -fx-fill: #1A3626; /* Verde oscuro */
+    -fx-font-family: "Georgia", "Times New Roman", serif; /* Fuente con serifa para elegancia */
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.titulo-secundario {
+    -fx-fill: #1A3626;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.label {
+    -fx-text-fill: #4A4A4A;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 5 0;
+}
+
+.text-field {
+    -fx-background-color: #F5F5F5; /* Fondo gris muy claro */
+    -fx-background-radius: 6px;
+    -fx-border-color: #D1D1D1;
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+    -fx-padding: 10px 12px;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-border-color: #1A3626; /* Borde verde oscuro al seleccionar */
+    -fx-background-color: #FFFFFF;
+}
+
+.button {
+    -fx-background-color: #1A3626; /* Verde oscuro */
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 12px 20px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #264d37;
+    -fx-translate-y: -2px; /* Un valor negativo eleva el botón */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0.0, 0, 4);
+}
+
+.button:pressed {
+    -fx-background-color: #112419;
+}
+
+.line {
+    -fx-stroke: #E5E5E5;
+    -fx-stroke-width: 1px;
+}
+
+.tarjetaProd{
+    -fx-background-color: #fffdf8;
+    -fx-background-radius: 12;
+    -fx-padding: 10;
+    -fx-spacing: 8;
+    -fx-alignment: center;
+    -fx-border-color: #c0bfbe;
+    -fx-border-radius: 12;
+    -fx-pref-width: 350;
+}

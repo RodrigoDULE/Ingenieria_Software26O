@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -94,6 +95,7 @@ public class vistaCarritoPrincipal {
         inicializarUI();
         // borramos todo lo que ente dentro de la ventana
         contenedorProductoscarrito.getChildren().clear();
+        contenedorProductoscarrito.setOrientation(Orientation.VERTICAL);
 
         cantidadTotalcarrito.setText("$" + carrito.getTotalCalculado() + "MXN");
 

@@ -78,7 +78,7 @@ public class controladorCatalogoMezicuil {
     //redireccion a los detalles de producto
     public void detallesProductoSeleccionado(Producto p){
         System.out.println("el producto trabajando " + p);
-        vistaDetallesProducto.muestraDetallesProd(p);
+        vistaDetallesProducto.muestraDetallesProd(p, vistaCatalogo.getStage());
     }
 
 

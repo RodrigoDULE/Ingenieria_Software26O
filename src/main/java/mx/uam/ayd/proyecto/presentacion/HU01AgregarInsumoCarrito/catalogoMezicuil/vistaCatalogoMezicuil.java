@@ -63,7 +63,7 @@ public class vistaCatalogoMezicuil {
             // Cargamos el fxml que tiene que ver con esta ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-catalogo-Mezicuil.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
-            Scene scene = new Scene(loader.load(), 650, 430);
+            Scene scene = new Scene(loader.load());
             scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
             stage.setScene(scene);
 
@@ -152,15 +152,6 @@ public class vistaCatalogoMezicuil {
         RadioButton botonPresionado = (RadioButton) componenteOrigen;
 
         if (controlCatalgo != null) {
-            /*
-             * if ("Todo".equals(botonPresionado.getText())) {
-             * System.out.println("Todo presionado");
-             * controlCatalgo.validarCriterio("Todo");
-             * } else {
-             * System.out.println("Boton seleccionado" + botonPresionado.getText());
-             * controlCatalgo.validarCriterio(botonPresionado.getText());
-             * }
-             */
             controlCatalgo.validarCriterio(botonPresionado.getText());
         } else {
             System.out.println("Error al inicalizar controlador");
@@ -209,5 +200,9 @@ public class vistaCatalogoMezicuil {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+    public Stage getStage(){
+        return this.stage;
     }
 }
