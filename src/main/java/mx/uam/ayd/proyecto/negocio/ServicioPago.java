@@ -70,7 +70,7 @@ public class ServicioPago {
         nueva.setFecha(ha);
         nueva.setMonto(carCompra.getTotalCalculado());
         nueva.setTotalProductos(carCompra.getCantidadTotalCompra());
-
+        carCompra.setCompra(nueva);
         // creamos el detallle de la compra
         repositorioCompra.save(nueva);
         
