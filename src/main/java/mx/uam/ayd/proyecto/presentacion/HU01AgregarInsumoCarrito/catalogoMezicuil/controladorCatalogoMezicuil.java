@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
+import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
+import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.negocio.servicioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.controladorDetallesProductoAgregarCarrito;
@@ -78,7 +80,7 @@ public class controladorCatalogoMezicuil {
     //redireccion a los detalles de producto
     public void detallesProductoSeleccionado(Producto p){
         System.out.println("el producto trabajando " + p);
-        vistaDetallesProducto.muestraDetallesProd(p, vistaCatalogo.getStage());
+        vistaDetallesProducto.muestraDetallesProd(p, GestionEscena.getInstEscena().getStage());
     }
 
 

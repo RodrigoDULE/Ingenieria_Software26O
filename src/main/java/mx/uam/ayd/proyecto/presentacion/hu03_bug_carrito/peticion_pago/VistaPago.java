@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.hu03_bug_carrito;
+package mx.uam.ayd.proyecto.presentacion.hu03_bug_carrito.peticion_pago;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -49,8 +49,11 @@ public class VistaPago {
     private Text envio;
 
     private boolean inicializado;
+    private Scene scene;
+    private Scene escenaAnterior;
     private Stage stage;
     private ControladorPago controladorPago;
+    private carritoCompra carritoCompra;
 
     // iniciamos iciando el escenario y posteriormente con las validaciones
     private void inicializarUI() {
@@ -65,23 +68,20 @@ public class VistaPago {
         }
 
         try {
-            stage = new Stage();
-            stage.setTitle("Catalogo Mezicuil");
 
             // Cargamos el fxml que tiene que ver con esta ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana_pago.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
-            Scene scene = new Scene(loader.load());
+            scene = new Scene(loader.load());
             expiracion.setTextFormatter(new TextFormatter<String>(change ->
                     change.getControlNewText().matches("(?:[01]?|(?:0[1-9]|1[0-2])(?:/\\d{0,2})?)")
                             ? change
                             : null));
             scene.getStylesheets().add(getClass().getResource("/css/Pago.css").toExternalForm());
-            stage.setScene(scene);
 
             inicializado = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("No se pudo cargar la ventana de pago.", e);
         }
     }
 
@@ -90,15 +90,21 @@ public class VistaPago {
         this.controladorPago = control;
     }
 
-    public void muestra(carritoCompra car) {
+    public void muestra(carritoCompra car, Stage stg) {
         List<Producto> prod = car.getProductos();
+        this.carritoCompra = car;
+        this.stage = stg;
+        this.escenaAnterior = stg.getScene();
 
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> muestra(car));
+            Platform.runLater(() -> muestra(car, stg));
             return;
         }
 
         inicializarUI();
+
+        stage.setScene(scene);
+        stage.setTitle("Proceder con compra");
 
         subTotal.setText("" + car.getTotalCalculado() + "MXN");
 
@@ -162,7 +168,7 @@ public class VistaPago {
                    mostrarMensaje("La fecha de expiración debe tener formato MM/AA y no estar vencida.");
                    return;
                }
-               System.out.println("Desarrollo");
+               controladorPago.pagarCarritoCompra(carritoCompra);
            }else{
                mostrarMensaje("Alguno de los campos no esta completo, o hacen falta digitos en tarjeta o cvv");
            }
@@ -192,5 +198,13 @@ public class VistaPago {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+   @FXML
+    public void handleVistaAnterior() {
+        if (stage != null && escenaAnterior != null) {
+            stage.setScene(escenaAnterior);
+            stage.setTitle("Catálogo Mezicuil");
+        }
     }
 }

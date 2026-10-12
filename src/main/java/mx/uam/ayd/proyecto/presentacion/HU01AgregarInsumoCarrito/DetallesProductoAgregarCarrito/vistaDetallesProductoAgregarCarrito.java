@@ -17,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
 import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 
@@ -121,11 +122,11 @@ public class vistaDetallesProductoAgregarCarrito {
         }
     }
 
-    public void muestraDetallesProd(Producto producto, Stage stage) {
+    public void muestraDetallesProd(Producto producto, Stage stg) {
         contador = 1;
         actual = producto;
-        this.stage = stage;
-        this.escenaAnterior = stage.getScene();
+        this.stage = stg;
+        this.escenaAnterior = stg.getScene();
 
         System.out.println("EL producto en el que se esta trabajando " + actual);
         if (!Platform.isFxApplicationThread()) {
@@ -159,6 +160,7 @@ public class vistaDetallesProductoAgregarCarrito {
         cantidadTexto.setText(String.valueOf(contador));
         cantidadTexto.setDisable(true);
 
+        //GestionEscena.getInstEscena().iniciarEscena(stg); //guarda esta escena
         stage.show();
     }
 

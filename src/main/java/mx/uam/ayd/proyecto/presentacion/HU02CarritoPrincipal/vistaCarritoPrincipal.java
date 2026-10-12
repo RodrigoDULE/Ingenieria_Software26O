@@ -17,12 +17,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.carritoCompra;
 
@@ -40,9 +40,12 @@ public class vistaCarritoPrincipal {
     @FXML
     private FlowPane contenedorProductoscarrito;
 
+    private Scene scene;
+    private Scene escenaAnterior;
     private Stage stage;
     private boolean inicializado = false;
     private controladorCarritoPrincipal controlcarritoPrincipal;
+    private carritoCompra carritoCompra;
 
     // constructor vacio
     public vistaCarritoPrincipal() {
@@ -66,15 +69,14 @@ public class vistaCarritoPrincipal {
         }
 
         try {
-            stage = new Stage();
-            stage.setTitle("Detalles de Producto");
 
             // Cargamos el fxml que tiene que ver con esta ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-carrito-principal.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
-            Scene scene = new Scene(loader.load(), 600, 410);
-            scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());//Estilo css
-            stage.setScene(scene);
+            scene = new Scene(loader.load());
+            scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());// Estilo
+                                                                                                             // css
+            // stage.setScene(scene);
 
             inicializado = true;
         } catch (Exception e) {
@@ -83,17 +85,25 @@ public class vistaCarritoPrincipal {
 
     }
 
-    public void muestraCarrito(carritoCompra carrito) {
+    public void muestraCarrito(carritoCompra carrito, Stage stg) {
+        this.carritoCompra = carrito;
+        this.stage = stg;
+        this.escenaAnterior = stg.getScene();
+
         System.out.println("Ventana carrito mostrada");
         List<Producto> listaProd = carrito.getProductoenCarrito();
 
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> muestraCarrito(carrito));
+            Platform.runLater(() -> muestraCarrito(carrito, stage));
             return;
         }
 
         inicializarUI();
         // borramos todo lo que ente dentro de la ventana
+
+        stage.setScene(scene);
+        stage.setTitle("Carrito Compras");
+
         contenedorProductoscarrito.getChildren().clear();
         contenedorProductoscarrito.setOrientation(Orientation.VERTICAL);
 
@@ -110,7 +120,7 @@ public class vistaCarritoPrincipal {
 
         // contenedor siempre va a estar vacio, por eso es mejor si la lista esta vacia
         if (listaProd.isEmpty()) {
-            //genero **IA**
+            // genero **IA**
             VBox emptyCartCard = new VBox();
             emptyCartCard.getStyleClass().add("empty-cart-container");
 
@@ -121,26 +131,27 @@ public class vistaCarritoPrincipal {
             Text title = new Text("Tu carrito está vacío");
             title.getStyleClass().add("empty-cart-title");
 
-            Text description = new Text("Explora nuestros productos disponibles\ny agrega lo que te guste a tu carrito.");
+            Text description = new Text(
+                    "Explora nuestros productos disponibles\ny agrega lo que te guste a tu carrito.");
             description.getStyleClass().add("empty-cart-description");
             description.setStyle("-fx-text-alignment: center;");
             description.setWrappingWidth(250);
 
             emptyCartCard.getChildren().addAll(icon, title, description);
             contenedorProductoscarrito.getChildren().add(emptyCartCard);
-            //genero **IA**
+            // genero **IA**
         } else {
             for (Producto dentro : listaProd) {
                 VBox tarjeta = new VBox();
-                tarjeta.getStyleClass().add("product-card");//Estilo css
+                tarjeta.getStyleClass().add("product-card");// Estilo css
 
                 Label nombre = new Label(dentro.getnombre());
-                nombre.getStyleClass().add("product-name");//Estilo css
-                
+                nombre.getStyleClass().add("product-name");// Estilo css
+
                 Button eliminarProd = new Button("Eliminar");
-                eliminarProd.getStyleClass().add("primary-button");//Estilo css
-                Label precioUnitario = new Label("$" + dentro.getPrecio()+"MXN");
-                precioUnitario.getStyleClass().add("product-price");//Estilo css
+                eliminarProd.getStyleClass().add("primary-button");// Estilo css
+                Label precioUnitario = new Label("$" + dentro.getPrecio() + "MXN");
+                precioUnitario.getStyleClass().add("product-price");// Estilo css
 
                 ImageView imagenProd = new ImageView(new Image(getClass().getResourceAsStream(dentro.getRutaImagen())));
                 imagenProd.setFitHeight(150);
@@ -160,6 +171,9 @@ public class vistaCarritoPrincipal {
                 });
             }
         }
+
+        //GestionEscena.getInstEscena().iniciarEscena(stg); // guarda esta escena
+
         stage.show();
     }
 
@@ -172,9 +186,22 @@ public class vistaCarritoPrincipal {
     @FXML
     private void handleDireccionEnvio() {
         if (controlcarritoPrincipal != null) {
+            if (carritoCompra.getProductos().isEmpty()) {
+                System.out.println("El carrito esta vacio, lo sentimos");
+                return;
+            }
             controlcarritoPrincipal.irDireccionEnvio();
+            stage.close();
         }
 
+    }
+
+    @FXML
+    public void handleVistaAnterior() {
+        if (stage != null && escenaAnterior != null) {
+            stage.setScene(escenaAnterior);
+            stage.setTitle("Catálogo Mezicuil");
+        }
     }
 
     // Metodo para mostrar mensajes de error o advertencia

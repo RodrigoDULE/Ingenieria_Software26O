@@ -22,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
 import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 
@@ -66,6 +67,13 @@ public class vistaCatalogoMezicuil {
             Scene scene = new Scene(loader.load());
             scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
             stage.setScene(scene);
+
+
+
+            //inicializamos la instancia unica
+            GestionEscena.getInstEscena().iniciarEscena(stage);
+            GestionEscena.getInstEscena().iniciarCatalogo(stage.getScene());
+
 
             inicializado = true;
         } catch (Exception e) {
@@ -202,7 +210,9 @@ public class vistaCatalogoMezicuil {
         alert.showAndWait();
     }
 
+    /*
     public Stage getStage(){
         return this.stage;
     }
+    */
 }

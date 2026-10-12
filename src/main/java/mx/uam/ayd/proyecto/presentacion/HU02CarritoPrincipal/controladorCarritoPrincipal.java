@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
+import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.negocio.servicioCarritoCompra;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
@@ -17,6 +18,7 @@ public class controladorCarritoPrincipal {
     private final servicioCarritoCompra servicioCarritoCompra;
     private final ControlDireccionesEnvio controlDirecciones;
 
+    
     @Autowired
     public controladorCarritoPrincipal(vistaCarritoPrincipal vistaCarritoPrincipal,
             servicioCarritoCompra servicioCarritoCompra, ControlDireccionesEnvio controlDirecciones) {
@@ -25,15 +27,16 @@ public class controladorCarritoPrincipal {
         this.controlDirecciones = controlDirecciones;
     }
 
+
     @PostConstruct
     private void inicializarControlador() {
         vistaCarritoPrincipal.setControlador(this);
     }
 
-    public void iniciaVentanaCarrito() {
+    public void iniciaVentanaCarrito(Stage stage) {
         carritoCompra car = servicioCarritoCompra.recuperaProductoEnCarrito();
         if (car != null) {
-            vistaCarritoPrincipal.muestraCarrito(car);
+            vistaCarritoPrincipal.muestraCarrito(car, stage);
         } else {
             vistaCarritoPrincipal.mostrarMensaje("Error, el cliente no tiene carrito activo");
         }

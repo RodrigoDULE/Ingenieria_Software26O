@@ -13,7 +13,7 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 
 // Importamos el controlador de la HU-03 (Método de Pago) para la integración de módulos.
-import mx.uam.ayd.proyecto.presentacion.hu03_bug_carrito.*;;
+import mx.uam.ayd.proyecto.presentacion.hu03_bug_carrito.peticion_pago.ControladorPago;;
 
 
 // Orquesta los flujos de negocio: listar, registrar, marcar como predeterminada y eliminar.

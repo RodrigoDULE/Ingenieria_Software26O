@@ -19,14 +19,14 @@
             <VBox prefHeight="466.0" prefWidth="466.0" styleClass="card">
                <children>
                   <Label alignment="CENTER" text="Número de Tarjeta" />
-                  <TextField fx:id="noTarjeta"  promptText="XXXX XXXX XXXX XXXX"/>
+                  <TextField fx:id="noTarjeta" promptText="XXXX XXXX XXXX XXXX" />
                   <Label text="Nombre del/la titular" />
-                  <TextField fx:id="nombreTitular"  promptText="Ej. Rodrigo Duque Leon"/>
+                  <TextField fx:id="nombreTitular" promptText="Ej. Rodrigo Duque Leon" />
                   <Label text="Fecha de Expiración" />
                   <TextField fx:id="expiracion" prefHeight="25.0" prefWidth="240.0" promptText="MM/AA" />
                   <Label text="Código de Seguridad (CVV)" />
-                  <TextField fx:id="cvv" prefHeight="25.0" prefWidth="240.0"  promptText="XXX"/>
-                  <Button fx:id="botonPagar" onAction="#handlePagar" mnemonicParsing="false" prefHeight="20.0" prefWidth="468.0" text="Realizar Pago" />
+                  <TextField fx:id="cvv" prefHeight="25.0" prefWidth="240.0" promptText="XXX" />
+                  <Button fx:id="botonPagar" mnemonicParsing="false" onAction="#handlePagar" prefHeight="20.0" prefWidth="468.0" text="Realizar Pago" />
                </children>
             </VBox>
          </children>
@@ -78,5 +78,6 @@
             </Text>
          </children>
       </VBox>
+      <Button id="atras" layoutX="827.0" onAction="#handleVistaAnterior" layoutY="21.0" mnemonicParsing="false" text="Carrito" />
    </children>
 </AnchorPane>
