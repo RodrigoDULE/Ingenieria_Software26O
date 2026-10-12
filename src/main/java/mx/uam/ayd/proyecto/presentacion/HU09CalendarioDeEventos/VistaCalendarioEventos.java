@@ -132,53 +132,51 @@ public class VistaCalendarioEventos {
         lblMes.setText(nombreMes + " " + mesActual.getYear());
     }
     
+    
+    public void dibujaCalendario() {
+        calendarGrid.getChildren().clear();
 
-    public void dibujaCalendario(){
-        LocalDate primerDia = mesActual.atDay(1);
-        
-        int diasMes= mesActual.lengthOfMonth();
-        int fila=0;
-        int columnaInicial= primerDia.getDayOfWeek().getValue();;
-        
-        if(columnaInicial==7){
+        int diasMes = mesActual.lengthOfMonth();
+        int fila = 0;
+        int columna = mesActual.atDay(1).getDayOfWeek().getValue() % 7; // domingo=0, lunes=1...
 
-            columnaInicial=0;
-        }
-        int columna = columnaInicial;
-        calendarGrid.getChildren().clear();;
-
-        for(int dia=1; dia <= diasMes; dia++){
-            
-            Button boton = new Button(Integer.toString(dia));
-            calendarGrid.add(boton, columna, fila);
-            //mesActual.atDay(dia);
-            
-            if(columna==7){
-                fila++;
-                columna=0;
-            }
+        for (int dia = 1; dia <= diasMes; dia++) {
             LocalDate fecha = mesActual.atDay(dia);
+            Button boton = new Button(Integer.toString(dia));
+            boton.setMaxWidth(Double.MAX_VALUE);
+            boton.setOnAction(e -> controlcalendario.seleccionarFecha(fecha));
+            calendarGrid.add(boton, columna, fila);
+
             columna++;
-            boton.setOnAction(event -> controlcalendario.seleccionarFecha(fecha));
+            if (columna == 7) {   // primero incrementa, luego revisa
+                columna = 0;
+                fila++;
+            }
         }
-
-
     }
 
     public void muestraCalendario() {
-        inicializarUI(); 
-        mesActual = YearMonth.now();
-    
-
-        dibujaCalendario();
-    
-
-        actualizarTituloMes();
-        if (stage != null) {
-            stage.show();
-        }
+    if (!Platform.isFxApplicationThread()) {
+        Platform.runLater(this::muestraCalendario);
+        return;
     }
-    
+    inicializarUI();
+    mesActual = YearMonth.now();
+    dibujaCalendario();
+    actualizarTituloMes();
+    if (stage != null) {
+        stage.show();
+    }
+}
+
+
+
+
+
+
+
+
+
     public void mostrarEventos(List <Evento> eventos){
         panelEventos.getChildren().clear();
         for(Evento evento: eventos){
