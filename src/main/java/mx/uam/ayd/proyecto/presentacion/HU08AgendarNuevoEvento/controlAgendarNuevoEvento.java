@@ -18,6 +18,8 @@ import mx.uam.ayd.proyecto.negocio.servicioEmpleado;
  * validar disponibilidad, construir datos del evento y registrarlo.
  * </p>
  */
+
+//control agendar evento
 @Component
 public class controlAgendarNuevoEvento {
     private final vistaAgendarNuevoEvento vistaAgendarNuevoEvento;

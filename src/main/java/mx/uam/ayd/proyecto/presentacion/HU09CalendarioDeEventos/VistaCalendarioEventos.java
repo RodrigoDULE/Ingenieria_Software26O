@@ -9,6 +9,8 @@ import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
 
+import javafx.scene.layout.ColumnConstraints;
+
 //librerias para escuchador
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -80,7 +82,7 @@ public class VistaCalendarioEventos {
     }
 
 
-    // UI
+    // UI 
     private void inicializarUI() {
         if (inicializado) {
             return;
@@ -111,8 +113,7 @@ public class VistaCalendarioEventos {
         }
 
     }
-
-
+     
 
     public void mesAnterior() {
         mesActual = mesActual.minusMonths(1); // resta 1 mes a la fecha guardada
