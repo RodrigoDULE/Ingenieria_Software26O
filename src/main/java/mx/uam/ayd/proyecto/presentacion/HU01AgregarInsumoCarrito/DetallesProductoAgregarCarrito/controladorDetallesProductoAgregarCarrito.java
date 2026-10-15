@@ -48,6 +48,6 @@ public class controladorDetallesProductoAgregarCarrito {
     }
 
     public void visitaCarritoCompra() {
-        controlCarrito.iniciaVentanaCarrito(GestionEscena.getInstEscena().getStage());
+        controlCarrito.iniciaVentanaCarrito();
     }
 }

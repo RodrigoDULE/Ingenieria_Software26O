@@ -15,7 +15,7 @@
          <children>
             <ScrollPane prefHeight="418.0" prefWidth="349.0">
                <content>
-                  <FlowPane fx:id="articulos" prefHeight="394.0" prefWidth="331.0" />
+                  <FlowPane fx:id="articulos" alignment="TOP_CENTER" columnHalignment="CENTER" prefHeight="406.0" prefWidth="347.0" />
                </content>
             </ScrollPane>
             <Pane prefHeight="50.0" prefWidth="349.0">
@@ -31,17 +31,17 @@
       <Text layoutX="263.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titulo-principal" text="¡Gracias por tu compra, Usuario!" />
       <Pane layoutX="182.0" layoutY="142.0" prefHeight="48.0" prefWidth="162.0" styleClass="card">
          <children>
-            <Text fx:id="idPedido" layoutX="35.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titulo-secundario" text="idPedido" />
+            <Text fx:id="idPedido" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titulo-secundario" text="idPedido" textAlignment="CENTER" wrappingWidth="162.0" />
          </children>
       </Pane>
       <Pane layoutX="420.0" layoutY="142.0" prefHeight="48.0" prefWidth="162.0" styleClass="card">
          <children>
-            <Text fx:id="idCarrito" layoutX="31.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titulo-secundario" text="idCarrito" wrappingWidth="100.087890625" />
+            <Text fx:id="idCarrito" layoutX="-3.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titulo-secundario" text="idCarrito" textAlignment="CENTER" wrappingWidth="168.0" />
          </children>
       </Pane>
       <Pane layoutX="655.0" layoutY="142.0" prefHeight="48.0" prefWidth="168.0" styleClass="card">
          <children>
-            <Text fx:id="fechaPedido" layoutX="20.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titulo-secundario" text="fechaPedido" />
+            <Text fx:id="fechaPedido" layoutX="-3.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titulo-secundario" text="fechaPedido" textAlignment="CENTER" wrappingWidth="174.197265625" />
          </children>
       </Pane>
       <Text layoutX="445.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titulo-principal" text="Mezicuil" />

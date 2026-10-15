@@ -33,10 +33,10 @@ public class controladorCarritoPrincipal {
         vistaCarritoPrincipal.setControlador(this);
     }
 
-    public void iniciaVentanaCarrito(Stage stage) {
+    public void iniciaVentanaCarrito() {
         carritoCompra car = servicioCarritoCompra.recuperaProductoEnCarrito();
         if (car != null) {
-            vistaCarritoPrincipal.muestraCarrito(car, stage);
+            vistaCarritoPrincipal.muestraCarrito(car);
         } else {
             vistaCarritoPrincipal.mostrarMensaje("Error, el cliente no tiene carrito activo");
         }

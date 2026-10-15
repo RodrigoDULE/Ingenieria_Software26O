@@ -52,6 +52,11 @@ public class ServicioPago {
             return false;
         }
 
+        if(carCompra.getProductos().isEmpty()){
+            System.out.println("El carrito esta vacio");
+            return false;
+        }
+
         System.out.println("El stock de todos los productos es valido, comenzando la peticion de compra");
         // recuperamos al cliente mediante su id de usuario
         long idCliente = gestionCliente.getInstance().getIdActivo();
@@ -84,6 +89,9 @@ public class ServicioPago {
             detCompra.setProductoFK(prodCompra.getProd());
             detCompra.setPrecioProducto(prodCompra.getProd().getPrecio());
             detCompra.setCantidadComprada(prodCompra.getCantidadTotalProd());
+            
+            nueva.setDetalleCompra(detCompra);//guarda la referencia para despues recuperar los detalles desde la compra
+            
             repositorioDetallesCompra.save(detCompra);
             repositorioProducto.save(prodCompra.getProd()); //para que se guarde e producto con el stock actualzaido
         });

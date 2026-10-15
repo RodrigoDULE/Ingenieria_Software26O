@@ -33,6 +33,8 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 public class vistaCatalogoMezicuil {
 
     private Stage stage;
+    //GEnerado por IA
+    private Scene scene;
     private boolean inicializado = false;
     private controladorCatalogoMezicuil controlCatalgo;
 
@@ -58,22 +60,30 @@ public class vistaCatalogoMezicuil {
         }
 
         try {
-            stage = new Stage();
+            //GEnerado por IA
+            stage = GestionEscena.getInstEscena().getStage();
+            //GEnerado por IA
+            if (stage == null) {
+                //GEnerado por IA
+                stage = new Stage();
+                //GEnerado por IA
+            }
             stage.setTitle("Catalogo Mezicuil");
 
             // Cargamos el fxml que tiene que ver con esta ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-catalogo-Mezicuil.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
-            Scene scene = new Scene(loader.load());
+            //GEnerado por IA
+            scene = new Scene(loader.load());
             scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
             stage.setScene(scene);
 
+            // solicitamos un nuevo recalculo de diseño en la raiz de la escena
+            scene.getRoot().requestLayout();
 
-
-            //inicializamos la instancia unica
+            // inicializamos la instancia unica
             GestionEscena.getInstEscena().iniciarEscena(stage);
             GestionEscena.getInstEscena().iniciarCatalogo(stage.getScene());
-
 
             inicializado = true;
         } catch (Exception e) {
@@ -94,6 +104,10 @@ public class vistaCatalogoMezicuil {
         }
 
         inicializarUI();
+        //GEnerado por IA
+        stage.setScene(scene);
+        //GEnerado por IA
+        stage.setTitle("Catalogo Mezicuil");
         // Borramos todo lo que este dentro de la ventana
         contenedorProductos.getChildren().clear();
 
@@ -126,10 +140,10 @@ public class vistaCatalogoMezicuil {
             });
         }
 
-        //Añadimos el boton del bot
+        // Añadimos el boton del bot
         if (gestionCliente.getInstance().getIdActivo() == 6) {
             Button bot = new Button("Bot");
-            //agregamos una tarjeta de bot
+            // agregamos una tarjeta de bot
             VBox tarjeta = new VBox();
             tarjeta.getStyleClass().add("product-card");
             Label nombre = new Label("AsistenteBot");
@@ -140,7 +154,7 @@ public class vistaCatalogoMezicuil {
             bot.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent evento) {
-                  controlCatalgo.EnviarBot();
+                    controlCatalgo.EnviarBot();
                 }
             });
         }
@@ -211,8 +225,8 @@ public class vistaCatalogoMezicuil {
     }
 
     /*
-    public Stage getStage(){
-        return this.stage;
-    }
-    */
+     * public Stage getStage(){
+     * return this.stage;
+     * }
+     */
 }

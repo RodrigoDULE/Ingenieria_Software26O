@@ -12,9 +12,9 @@ import mx.uam.ayd.proyecto.presentacion.hu03_bug_carrito.pago_exitoso.Controlado
 @Component 
 public class ControladorPago {
 
-    private VistaPago vistaPago;
-    private ServicioPago servicioPago;
-    private ControladorExitoPago controladorExitoPago;
+    private final VistaPago vistaPago;
+    private final ServicioPago servicioPago;
+    private final ControladorExitoPago controladorExitoPago;
     
     @Autowired 
     ControladorPago(VistaPago vistaPago, ServicioPago servicioPago, ControladorExitoPago controladorExitoPago){
@@ -23,7 +23,6 @@ public class ControladorPago {
         this.controladorExitoPago = controladorExitoPago;
     }
 
-    ControladorPago(){}
 
     @PostConstruct 
     private void inicializarControlador(){
@@ -35,10 +34,14 @@ public class ControladorPago {
 
         if(!pagado){
             System.out.println("No se ha podido pagar el carrito");
+            vistaPago.mostrarMensaje("Ocurrio un error en el pago del carrito, por favor reinicie las ventanas");
             return ;
+        }else{
+
+            controladorExitoPago.muestraVentanaExito(carritoCompra);
+            
         }
 
-        controladorExitoPago.muestraVentanaExito(carritoCompra);
     }
     
     public void iniciaVentanaMetodoPago(long idUsuario){

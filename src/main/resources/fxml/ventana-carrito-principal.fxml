@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
@@ -8,57 +10,77 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="1001.0" styleClass="root-pane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="1001.0" styleClass="root-pane" stylesheets="@../css/estilos-mezicuil.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Line endX="865.0" layoutX="115.0" layoutY="64.0" startX="-100.0" stroke="#99a89b" />
-      <Text fill="#0b522b" layoutX="15.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="Mezicuil">
+      <Text fill="#0b522b" layoutX="81.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="Mezicuil">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
       </Text>
-      <Line endX="-100.0" endY="370.0" layoutX="580.0" layoutY="81.0" startX="-100.0" startY="-13.5" stroke="#99a89b" />
-      <Text fill="#0b522b" layoutX="612.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-title" text="Resumen de pedido" wrappingWidth="221.61328125">
-         <font>
-            <Font name="Cambria Bold" size="18.0" />
-         </font>
-      </Text>
-      <Line endX="454.0" layoutX="484.0" layoutY="117.0" startX="-3.5" stroke="#99a89b" />
-      <Text fill="#005110" layoutX="604.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-      </Text>
-      <Text fill="#005110" layoutX="604.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Envío">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-      </Text>
-      <Text fx:id="cantidadTotalcarrito" layoutX="744.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad total">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-      </Text>
-      <Text fx:id="costoEnvioCarrito" fill="#945c08" layoutX="744.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="costo envio">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-      </Text>
-      <Button layoutX="634.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleDireccionEnvio" prefHeight="40.0" prefWidth="162.0" styleClass="primary-button" text="Continuar" />
-      <Line endX="454.0" layoutX="365.0" layoutY="221.0" startX="228.5" stroke="#99a89b" />
-      <Text fill="#005110" layoutX="604.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
-         <font>
-            <Font name="System Bold Italic" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="costoTotal" fill="#005110" layoutX="715.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio Total">
-         <font>
-            <Font name="System Bold Italic" size="18.0" />
-         </font>
-      </Text>
-      <ScrollPane layoutX="15.0" layoutY="72.0" prefHeight="373.0" prefWidth="451.0" styleClass="panel-card">
+      <ScrollPane layoutX="14.0" layoutY="81.0" prefHeight="582.0" prefWidth="566.0" styleClass="panel-card">
          <content>
-            <FlowPane fx:id="contenedorProductoscarrito" prefHeight="359.0" prefWidth="435.0" />
+            <FlowPane fx:id="contenedorProductoscarrito" alignment="TOP_CENTER" columnHalignment="CENTER" prefHeight="552.0" prefWidth="538.0">
+               <opaqueInsets>
+                  <Insets top="10.0" />
+               </opaqueInsets></FlowPane>
          </content></ScrollPane>
-      <Button fx:id="atras" layoutX="896.0" onAction= "#handleVistaAnterior" layoutY="26.0" mnemonicParsing="false" text="Atras" />
+      <Button fx:id="atras" layoutX="15.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleVistaAnterior" styleClass="primary-button" text="Atras" />
+      <Pane layoutX="592.0" layoutY="81.0" prefHeight="582.0" prefWidth="380.0" styleClass="panel-card">
+         <children>
+            <Line endX="519.0" layoutX="-151.0" layoutY="60.0" startX="158.0" stroke="#99a89b" />
+            <Text fill="#0b522b" layoutX="79.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-subTitle" text="Resumen de pedido" textAlignment="CENTER" wrappingWidth="221.61328125">
+               <font>
+                  <Font name="Cambria Bold" size="18.0" />
+               </font>
+            </Text>
+            <Button fx:id="proceder" layoutX="32.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleDireccionEnvio" prefHeight="40.0" prefWidth="312.0" styleClass="primary-button" text="Continuar" />
+            <Text fx:id="costoTotal" fill="#005110" layoutX="246.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio Total">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#005110" layoutX="43.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <Line endX="549.0" layoutX="-178.0" layoutY="151.0" startX="187.0" stroke="#99a89b" />
+            <Text fill="#005110" layoutX="41.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="cantidadTotalcarrito" layoutX="256.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad total">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
+            <Text fill="#005110" layoutX="50.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Envío">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="costoEnvioCarrito" fill="#945c08" layoutX="265.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="costo envio">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
+            <Pane layoutX="32.0" layoutY="403.0" prefHeight="143.0" prefWidth="312.0" styleClass="summary-card">
+               <children>
+                  <Label alignment="CENTER" layoutX="19.0" layoutY="14.0" prefHeight="116.0" prefWidth="275.0" styleClass="section-subTitle" text="En Mezicuil celebramos la tradición mexicana. Encuentra los mejores tequilas y mezcales artesanales para brindar con el alma del agave." textAlignment="CENTER" wrapText="true" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane layoutY="689.0" prefHeight="93.0" prefWidth="1001.0" styleClass="summary-panelInterior">
+         <children>
+            <Text fill="#0b522b" layoutX="33.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-subTitle" text="Mezicuil">
+               <font>
+                  <Font name="Cambria Bold" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </Pane>

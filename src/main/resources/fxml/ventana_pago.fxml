@@ -47,7 +47,7 @@
             </Text>
             <ScrollPane prefHeight="428.0" prefWidth="335.0">
                <content>
-                  <FlowPane fx:id="articulos" prefHeight="388.0" prefWidth="329.0" />
+                  <FlowPane fx:id="articulos" alignment="TOP_CENTER" columnHalignment="CENTER" prefHeight="416.0" prefWidth="356.0" />
                </content>
             </ScrollPane>
             <Line endX="256.29290771484375" endY="-0.7071067690849304" startX="-100.0" stroke="#b9b8b8" />

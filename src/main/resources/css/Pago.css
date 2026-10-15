@@ -85,3 +85,14 @@
     -fx-border-radius: 12;
     -fx-pref-width: 350;
 }
+
+.tarjetaProdExitoso{
+    -fx-background-color: #fffdf8;
+    -fx-background-radius: 12;
+    -fx-padding: 10;
+    -fx-spacing: 8;
+    -fx-alignment: center;
+    -fx-border-color: #c0bfbe;
+    -fx-border-radius: 12;
+    -fx-pref-width: 345;
+}

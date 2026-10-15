@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -18,31 +17,26 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
-import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DetallesCompra;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.carritoCompra;
-import mx.uam.ayd.proyecto.presentacion.hu03_bug_carrito.peticion_pago.ControladorPago;
 
-@Component 
+@Component
 public class VistaExitoPago {
-    @FXML 
+    @FXML
     private Text idPedido;
-    @FXML 
+    @FXML
     private Text idCarrito;
-    @FXML 
+    @FXML
     private Text fechaPedido;
-    @FXML 
+    @FXML
     private Text pagado;
-    @FXML 
+    @FXML
     private FlowPane articulos;
-
-
 
     private boolean inicializado;
     private Scene scene;
-    private Scene escenaAnterior;
     private Stage stage;
     private ControladorExitoPago controladorExitoPago;
-    private carritoCompra carritoCompra;
 
     // iniciamos iciando el escenario y posteriormente con las validaciones
     private void inicializarUI() {
@@ -72,17 +66,25 @@ public class VistaExitoPago {
 
     // establecemos el controlador asiciado a esta ventana
     public void setControlador(ControladorExitoPago control) {
-        this.controladorExitoPago= control;
+        this.controladorExitoPago = control;
     }
 
-    public void muestra(carritoCompra car, Scene stg) {
-        List<Producto> prod = car.getProductos();
-        this.carritoCompra = car;
+    //GEnerado por IA
+    public void muestra(carritoCompra car) {
+        List<DetallesCompra> prod = car.getCompra().getDetalleCompra();
+        if (prod != null) {
+            System.out.println("La lista de detalles producto contiene productos...");
+        }
+
+        if (prod.isEmpty()) {
+            System.out.println("La lista de productos esta vacia.");
+        }
+
         this.stage = GestionEscena.getInstEscena().getStage();
-        this.escenaAnterior = stg;
 
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> muestra(car, stg));
+            //GEnerado por IA
+            Platform.runLater(() -> muestra(car));
             return;
         }
 
@@ -91,7 +93,7 @@ public class VistaExitoPago {
         stage.setScene(scene);
         stage.setTitle("Proceder con compra");
 
-        //llenamos los id
+        // llenamos los id
         idPedido.setText("IdCompra:" + car.getCompra().getIdCompra());
         idCarrito.setText("IdCarrito:" + car.getIdCarrito());
         fechaPedido.setText("" + car.getCompra().getFecha());
@@ -99,17 +101,21 @@ public class VistaExitoPago {
         // Borramos todo lo que este dentro de la ventana
         articulos.getChildren().clear();
         articulos.setOrientation(Orientation.HORIZONTAL);
-        for (Producto p : prod) {
-            HBox tarjeta = new HBox();
-            tarjeta.getStyleClass().add("tarjetaProd");
 
-            Label nombre = new Label(p.getnombre());
+        for (DetallesCompra p : prod) {
+
+            System.out.println("Renderizado de pantalla de pago: " + p.getProductoFK().getnombre());
+            HBox tarjeta = new HBox();
+            tarjeta.getStyleClass().add("tarjetaProdExitoso");
+
+            Label nombre = new Label(p.getProductoFK().getnombre());
             nombre.getStyleClass().add("product-name");
 
-            Label precio = new Label("$" + p.getPrecio());
+            Label precio = new Label("$" + p.getProductoFK().getPrecio());
             precio.getStyleClass().add("product-price");
 
-            ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(p.getRutaImagen())));
+            ImageView imagen = new ImageView(
+                    new Image(getClass().getResourceAsStream(p.getProductoFK().getRutaImagen())));
             // Le damos un tamaño bonito a la imagen
             imagen.setFitHeight(140);
             imagen.setFitWidth(120);
@@ -126,9 +132,11 @@ public class VistaExitoPago {
 
     @FXML
     public void handleVistaAnterior() {
-        if (stage != null && escenaAnterior != null) {
-            stage.setScene(escenaAnterior);
-            stage.setTitle("Catálogo Mezicuil");
+        //GEnerado por IA
+        if (controladorExitoPago != null) {
+            //GEnerado por IA
+            controladorExitoPago.regresarAlCatalogo();
+            //GEnerado por IA
         }
     }
 }
