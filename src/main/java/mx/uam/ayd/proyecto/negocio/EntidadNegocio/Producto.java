@@ -24,6 +24,9 @@ public class Producto {
     private int contenidoMCL;
     private float GradoAlcohol;
     private String imagen;
+    private String tipoAgave;
+    private String region;
+    private int volumen;
 
 
 
@@ -39,6 +42,17 @@ public class Producto {
         this.GradoAlcohol = GradoAlcohol;
         this.imagen = imagen;
     }
+    
+    //Sobrecarga de constructor para nuevos atributos en catálogo (HU-01)
+    public Producto(String nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen, int volumen, String tipoAgave, String region){
+        this(nombre,precio,Descripcion,CantidadStock,contenidoMCL,GradoAlcohol,tipoProd,imagen);
+        this.volumen = volumen;
+        this.tipoAgave = tipoAgave;
+        this.region = region;
+    } 
+    
+    
+    
 
     //Quiero sabe a que cliente le pertenece
     @ManyToOne(targetEntity = Cliente.class, fetch = FetchType.EAGER)
@@ -61,6 +75,10 @@ public class Producto {
     public float getGradoAlcohol(){ return GradoAlcohol;}
     public String getTipoProd(){ return tipoProd;}
     public String getRutaImagen(){ return imagen;}
+    public String gettipoAgave(){ return tipoAgave;}
+    public String getregion(){ return region;}
+    public int getvolumen(){ return volumen;}
+    
     
     //Solo es prueba para agregar dueño al producto
     public Cliente getingresarIdDueño(){return cliente;}
@@ -82,7 +100,9 @@ public class Producto {
     public void setEvento(Evento evento){this.evento = evento;}
     public List<DetallesCompra> getDetalleCompra(){return detalleCompra;}
     public void setDetalleCompra(List<DetallesCompra> detalleCompra){this.detalleCompra = detalleCompra;}
-
+    public void settipoAgave(String tipoAgave){this.tipoAgave=tipoAgave;}
+    public void setregion(String region){ this.region=region;}
+    public void setvolumen(int volumen){ this.volumen=volumen;}
 
     //generado **IA**
     @Override
