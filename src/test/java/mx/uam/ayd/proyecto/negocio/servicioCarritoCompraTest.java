@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
@@ -49,28 +49,30 @@ public class servicioCarritoCompraTest {
         long idUsuario = 1L;
         gestionCliente.getInstance().iniciarSesion(idUsuario);
         int cantidad = 2; // La cantidad que intentamos agregar
-        Producto productoMock = Mockito.mock(Producto.class);
+        Cliente clienteFalso = new Cliente();
+        when(repoCliente.findByIdCliente(idUsuario)).thenReturn(clienteFalso);
+
+        Producto producto = new Producto();
+        producto.setPrecio(20.0f);
 
         // Configuramos el comportamiento: simulamos que NO hay stock (<= 0)
-        Mockito.when(productoMock.getcantidadStock()).thenReturn(0);
+        producto.setcantidadStock(0);
 
         // 2. EJECUCIÓN (Act)
         // Llamamos al método real de nuestro servicio inyectado
-        boolean resultado = servicioCarritoCompra.agregarItem(productoMock, cantidad);
+        boolean resultado = servicioCarritoCompra.agregarItem(producto, cantidad);
 
         // 3. VERIFICACIÓN (Assert)
         // Verificamos que el resultado sea efectivamente 'false'
         assertFalse(resultado);
 
         // caso 2: retorna verdadero si es que se agrego el producto exitosamente
-        Cliente clienteFalso = new Cliente();
-        // recuperamos el cliente
-        when(repoCliente.findByIdCliente(idUsuario)).thenReturn(clienteFalso);
         // configiramos el comportamiento simulando que hay mas productos
-        when(productoMock.getcantidadStock()).thenReturn(5);
+        producto.setcantidadStock(5);
 
-        boolean resultado2 = servicioCarritoCompra.agregarItem(productoMock, cantidad);
+        boolean resultado2 = servicioCarritoCompra.agregarItem(producto, cantidad);
         assertTrue(resultado2);
+        assertEquals(cantidad, clienteFalso.getCarritoCompra().getCantidadTotalCompra());
     }
 
     @Test
@@ -102,29 +104,6 @@ public class servicioCarritoCompraTest {
 
     @Test
     void testEliminarProdCarrito(){
-        /*
-        //given
-        long idActivo = 1L;
-        gestionCliente.getInstance().iniciarSesion(idActivo);
-        Cliente clFalso = new Cliente();
-        carritoCompra car = new carritoCompra();
-        Producto prod = new Producto();
-        List<IntermediaCarritoProd> inter;
-        
-        car.setProducto(prod);
-        clFalso.setcarritoCompra(car);
-        
-        when(repoCliente.findByIdCliente(idActivo)).thenReturn(clFalso); //Se activa el cliente
-        when(repoInter.findByCarIdCarrito(idActivo)).thenReturn(inter);
-        
-        //when 
-        boolean res = servicioCarritoCompra.EliminarProdCarrito(prod);
-        
-        //then
-        assertTrue(res);
-        */
-
-        //**Generado por IA **/
         long idActivo = 1L;
         gestionCliente.getInstance().iniciarSesion(idActivo);
 
@@ -139,14 +118,17 @@ public class servicioCarritoCompraTest {
         inter.setCantidadTotalProd(1);
 
         car.setProducto(prod);
+        car.setInterCar(new ArrayList<>(List.of(inter)));
         clFalso.setcarritoCompra(car);
 
         when(repoCliente.findByIdCliente(idActivo)).thenReturn(clFalso);
-        when(repoInter.findByCarIdCarrito(car.getid())).thenReturn(List.of(inter));
 
         boolean res = servicioCarritoCompra.EliminarProdCarrito(prod);
 
         assertTrue(res);
+        assertTrue(car.getProductos().isEmpty());
+        assertTrue(car.getInterCar().isEmpty());
+        
     }
 
     @Test
@@ -184,4 +166,3 @@ public class servicioCarritoCompraTest {
         assertEquals(0.0, resultado, 0.0001);
     }
 }
-
