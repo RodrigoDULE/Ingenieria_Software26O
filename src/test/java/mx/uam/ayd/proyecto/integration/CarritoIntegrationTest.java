@@ -3,6 +3,9 @@ package mx.uam.ayd.proyecto.integration;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,30 +84,35 @@ public class CarritoIntegrationTest extends BaseIntegrationTest {
 
     @Test
     @Transactional
-    void TestEliminarProducto(){
+    void testEliminarProducto(){
         //given
         Cliente client = new Cliente();
-        repoCliente.save(client);
-        gestionCliente.getInstance().iniciarSesion(client.getidCliente());
-
-        carritoCompra car = new carritoCompra();
-        repoCar.save(car);
 
         Producto prod = new Producto();
         repoProd.save(prod);
 
+        carritoCompra car = new carritoCompra();
+        car.setProducto(prod);
+
         IntermediaCarritoProd inter = new IntermediaCarritoProd();
         inter.setCarrito(car);
         inter.setProd(prod);
-        repoInter.save(inter);
-        
-        car.setProducto(prod);
+        inter.setCantidadTotalProd(1);
+        car.setInterCar(new ArrayList<>(List.of(inter)));
+        car.setCantidadTotalCompra(1);
         client.setcarritoCompra(car);
+
+        repoCar.save(car);
+        repoCliente.save(client);
+        gestionCliente.getInstance().iniciarSesion(client.getidCliente());
 
         //when
         boolean borrado = servicioCarrito.EliminarProdCarrito(prod);
 
         //then
         assertTrue(borrado);
+        assertTrue(car.getProductos().isEmpty());
+        assertTrue(car.getInterCar().isEmpty());
+        assertTrue(repoInter.findByCarIdCarrito(car.getIdCarrito()).isEmpty());
     }
 }

@@ -1,6 +1,7 @@
 package mx.uam.ayd.proyecto.negocio.EntidadNegocio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -34,7 +35,7 @@ public class Compra{
     private carritoCompra carrito;
 
     @OneToMany(mappedBy = "compraFK")
-    private List<DetallesCompra> detalleCompra;
+    private List<DetallesCompra> detalleCompra = new ArrayList<>();
 
     @ManyToOne 
     @JoinColumn (name = "clienteFK")
@@ -164,8 +165,8 @@ public class Compra{
         return detalleCompra;
     }
 
-    public void setDetalleCompra(List<DetallesCompra> detalleCompra) {
-        this.detalleCompra = detalleCompra;
+    public void setDetalleCompra(DetallesCompra detalleCompra) {
+        this.detalleCompra.add(detalleCompra);
     }
 
     public Cliente getClienteFK() {

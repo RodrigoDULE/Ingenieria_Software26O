@@ -136,3 +136,26 @@
     -fx-fill: #666666;
     -fx-font-size: 14px;
 }
+
+
+.tarjetaProdCarrito{
+    -fx-background-color: #fffdf8;
+    -fx-background-radius: 12;
+    -fx-padding: 10;
+    -fx-spacing: 8;
+    -fx-alignment: center;
+    -fx-border-color: #c0bfbe;
+    -fx-border-radius: 12;
+    -fx-pref-width: 525;
+    -fx-pref-height: 150;
+}
+
+.summary-panelInterior{
+    -fx-background-color: #dad0c1;
+    -fx-background-radius: 1;
+    -fx-padding: 12;
+    -fx-spacing: 8;
+    -fx-border-color: #dad0c1;
+    -fx-border-radius: 12;
+
+}

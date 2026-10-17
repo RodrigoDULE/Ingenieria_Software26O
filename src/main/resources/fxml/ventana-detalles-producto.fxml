@@ -9,35 +9,40 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<Pane id="piezasDetalles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="piezasDetalles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1002.0" styleClass="root-pane" stylesheets="@../css/estilos-mezicuil.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <FlowPane fx:id="imagenDetalles" layoutX="21.0" layoutY="55.0" prefHeight="256.0" prefWidth="306.0" />
-      <Line endX="466.0" layoutX="115.0" layoutY="51.0" startX="-100.0" stroke="#b2b2b2" />
-      <Line endX="140.0" layoutX="437.0" layoutY="121.0" startX="-100.0" stroke="#b2b2b2" />
-      <Line endX="-47.0" endY="279.0" layoutX="383.0" layoutY="120.0" startX="-47.0" startY="-68.0" stroke="#b2b2b2" />
-      <Text fx:id="precioDetalles" fill="#144d03" layoutX="345.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio">
-         <font>
-            <Font name="Candara Bold Italic" size="18.0" />
-         </font>
-      </Text>
-      <Line endX="140.0" layoutX="437.0" layoutY="159.0" startX="-100.0" stroke="#b2b2b2" />
-      <Text layoutX="344.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción">
-         <font>
-            <Font name="Candara Bold Italic" size="14.0" />
-         </font>
-      </Text>
-      <Text fill="#165702" fontSmoothingType="LCD" layoutX="21.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mezicuil Detalles">
+      <Line endX="868.0" layoutX="116.0" layoutY="67.0" startX="-100.0" stroke="#b2b2b2" />
+      <Text fill="#165702" fontSmoothingType="LCD" layoutX="86.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="Mezicuil Detalles">
          <font>
             <Font name="System Bold Italic" size="22.0" />
          </font>
       </Text>
-      <TextFlow fx:id="descripcionProdDetalles" layoutX="343.0" layoutY="183.0" prefHeight="109.0" prefWidth="229.0" />
-      <Button fx:id="agregarCarritoDetalles" styleClass="primary-button" layoutX="481.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleAgregaraCarrito" text="Agregar Carrito" />
-      <TextFlow fx:id="nombreDetalles" layoutX="343.0" layoutY="56.0" prefHeight="62.0" prefWidth="229.0" styleClass="-fx-fill: black" textAlignment="CENTER" />
-      <TextField fx:id="cantidadTexto" styleClass="search-field" layoutX="375.0" layoutY="292.0" prefHeight="25.0" prefWidth="34.0" />
-      <Button fx:id="incrementarDetalles" styleClass="primary-button" layoutX="409.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleIncrementarDecrementar" prefHeight="25.0" prefWidth="34.0" text="+" />
-      <Button fx:id="decrementarDetalles" styleClass="primary-button" layoutX="341.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleIncrementarDecrementar" prefHeight="25.0" prefWidth="34.0" text="-" />
-      <Text fx:id="piezasDetalles" fill="#dd0e0e" layoutX="354.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hay 15 piezas disponibles dentro de stock" />
-      <Button fx:id="irCarrito" styleClass="primary-button" layoutX="517.0" layoutY="16.0" onAction="#handleIrCarrito" mnemonicParsing="false" text="Ir carrito" />
+      <Button fx:id="irCarrito" layoutX="908.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleIrCarrito" styleClass="primary-button" text="Ir carrito" />
+      <Button id="vistaAnterior" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleVistaAnterior" styleClass="primary-button" text="Atras" />
+      <Line endX="868.0" layoutX="115.0" layoutY="517.0" startX="-100.0" stroke="#b2b2b2" />
+      <Pane layoutX="17.0" layoutY="81.0" prefHeight="420.0" prefWidth="969.0" styleClass="panel-card">
+         <children>
+            <Line endX="-47.0" endY="315.0" layoutX="383.0" layoutY="90.0" startX="-47.0" startY="-80.0" stroke="#b2b2b2" styleClass="summary-card" />
+            <TextFlow fx:id="nombreDetalles" layoutX="349.0" layoutY="14.0" prefHeight="62.0" prefWidth="296.0" styleClass="page-title" textAlignment="CENTER" />
+            <FlowPane fx:id="imagenDetalles" layoutX="7.0" layoutY="33.0" prefHeight="320.0" prefWidth="322.0" styleClass="summary-card" />
+            <Line endX="-47.0" endY="322.0" layoutX="704.0" layoutY="80.0" startX="-47.0" startY="-68.0" stroke="#b2b2b2" />
+            <Text fx:id="precioDetalles" fill="#144d03" layoutX="349.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="Precio" textAlignment="CENTER" wrappingWidth="296.0">
+               <font>
+                  <Font name="Candara Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="449.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-subTitle" text="Descripción">
+               <font>
+                  <Font name="Candara Bold Italic" size="14.0" />
+               </font>
+            </Text>
+            <TextFlow fx:id="descripcionProdDetalles" layoutX="349.0" layoutY="131.0" prefHeight="150.0" prefWidth="296.0" styleClass="section-subTitle" textAlignment="CENTER" />
+            <Button fx:id="agregarCarritoDetalles" layoutX="713.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleAgregaraCarrito" prefHeight="30.0" prefWidth="215.0" styleClass="primary-button" text="Agregar Carrito" />
+            <Button fx:id="decrementarDetalles" layoutX="714.0" layoutY="197.0" minWidth="53.0" mnemonicParsing="false" onAction="#handleIncrementarDecrementar" prefHeight="30.0" prefWidth="53.0" styleClass="primary-button" text="-" />
+            <Button fx:id="incrementarDetalles" layoutX="874.0" layoutY="199.0" mnemonicParsing="false" onAction="#handleIncrementarDecrementar" prefHeight="25.0" prefWidth="34.0" styleClass="primary-button" text="+" />
+            <TextField fx:id="cantidadTexto" layoutX="783.0" layoutY="198.0" prefHeight="28.0" prefWidth="75.0" styleClass="search-field" />
+            <Text fx:id="piezasDetalles" fill="#f50303" layoutX="741.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="summary-text" text="Hay 15 piezas disponibles dentro de stock" textAlignment="CENTER" wrappingWidth="159.88931274414062" />
+         </children>
+      </Pane>
    </children>
 </Pane>

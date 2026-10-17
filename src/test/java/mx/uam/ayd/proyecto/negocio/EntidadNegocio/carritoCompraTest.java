@@ -80,4 +80,26 @@ public class carritoCompraTest {
         //then
         assertTrue(gratis);
     }
+
+    //Criterio de aceptacion 1: se vacia el carrito
+    @Test
+    @DisplayName("Deberia regresar un true, ya que el carrito contiene productos") 
+    void vaciarCarritoTest(){
+        Producto prodPrueba = new Producto();
+        carritoPrueba.setProducto(prodPrueba);
+
+        boolean borro = carritoPrueba.vaciarCarrito();
+        assertTrue(borro);
+    }
+    
+    //Criterio de aceptacion 1: se vacia el carrito
+    @Test
+    @DisplayName("Deberia regresar un falso, ya que el carrito NO contiene productos") 
+    void vaciarCarritoFalsoTest(){
+        Producto prodPrueba = new Producto();
+
+        //carrito no contiene productos dentro del mismo
+        boolean borro = carritoPrueba.vaciarCarrito();
+        assertFalse(borro);
+    }
 }

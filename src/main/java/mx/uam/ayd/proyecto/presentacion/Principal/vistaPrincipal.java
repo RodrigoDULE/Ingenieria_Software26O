@@ -107,7 +107,7 @@ public class vistaPrincipal {
             txtOrdenId.setVisible(false);
             //TextoRecepcion.setVisible(false);
 
-            ingresarUsuario.setText("");
+            ingresarUsuario.setText("Predeterminado");
             stage.show();
         } else {
             System.out.println("Intentando abrir la ventana principal");

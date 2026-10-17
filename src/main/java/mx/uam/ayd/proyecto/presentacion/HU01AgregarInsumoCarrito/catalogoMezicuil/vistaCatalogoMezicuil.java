@@ -22,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
 import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 
@@ -32,6 +33,8 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 public class vistaCatalogoMezicuil {
 
     private Stage stage;
+    //GEnerado por IA
+    private Scene scene;
     private boolean inicializado = false;
     private controladorCatalogoMezicuil controlCatalgo;
 
@@ -57,15 +60,30 @@ public class vistaCatalogoMezicuil {
         }
 
         try {
-            stage = new Stage();
+            //GEnerado por IA
+            stage = GestionEscena.getInstEscena().getStage();
+            //GEnerado por IA
+            if (stage == null) {
+                //GEnerado por IA
+                stage = new Stage();
+                //GEnerado por IA
+            }
             stage.setTitle("Catalogo Mezicuil");
 
             // Cargamos el fxml que tiene que ver con esta ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-catalogo-Mezicuil.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
-            Scene scene = new Scene(loader.load(), 650, 430);
+            //GEnerado por IA
+            scene = new Scene(loader.load());
             scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
             stage.setScene(scene);
+
+            // solicitamos un nuevo recalculo de diseño en la raiz de la escena
+            scene.getRoot().requestLayout();
+
+            // inicializamos la instancia unica
+            GestionEscena.getInstEscena().iniciarEscena(stage);
+            GestionEscena.getInstEscena().iniciarCatalogo(stage.getScene());
 
             inicializado = true;
         } catch (Exception e) {
@@ -86,6 +104,10 @@ public class vistaCatalogoMezicuil {
         }
 
         inicializarUI();
+        //GEnerado por IA
+        stage.setScene(scene);
+        //GEnerado por IA
+        stage.setTitle("Catalogo Mezicuil");
         // Borramos todo lo que este dentro de la ventana
         contenedorProductos.getChildren().clear();
 
@@ -118,10 +140,10 @@ public class vistaCatalogoMezicuil {
             });
         }
 
-        //Añadimos el boton del bot
+        // Añadimos el boton del bot
         if (gestionCliente.getInstance().getIdActivo() == 6) {
             Button bot = new Button("Bot");
-            //agregamos una tarjeta de bot
+            // agregamos una tarjeta de bot
             VBox tarjeta = new VBox();
             tarjeta.getStyleClass().add("product-card");
             Label nombre = new Label("AsistenteBot");
@@ -132,7 +154,7 @@ public class vistaCatalogoMezicuil {
             bot.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent evento) {
-                  controlCatalgo.EnviarBot();
+                    controlCatalgo.EnviarBot();
                 }
             });
         }
@@ -152,15 +174,6 @@ public class vistaCatalogoMezicuil {
         RadioButton botonPresionado = (RadioButton) componenteOrigen;
 
         if (controlCatalgo != null) {
-            /*
-             * if ("Todo".equals(botonPresionado.getText())) {
-             * System.out.println("Todo presionado");
-             * controlCatalgo.validarCriterio("Todo");
-             * } else {
-             * System.out.println("Boton seleccionado" + botonPresionado.getText());
-             * controlCatalgo.validarCriterio(botonPresionado.getText());
-             * }
-             */
             controlCatalgo.validarCriterio(botonPresionado.getText());
         } else {
             System.out.println("Error al inicalizar controlador");
@@ -210,4 +223,10 @@ public class vistaCatalogoMezicuil {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
+    /*
+     * public Stage getStage(){
+     * return this.stage;
+     * }
+     */
 }

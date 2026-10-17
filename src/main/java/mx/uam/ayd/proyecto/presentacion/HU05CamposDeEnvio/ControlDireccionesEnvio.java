@@ -13,7 +13,7 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 
 // Importamos el controlador de la HU-03 (Método de Pago) para la integración de módulos.
-import mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.MetodoPago.ControlMetodoPago;
+import mx.uam.ayd.proyecto.presentacion.hu03_bug_carrito.peticion_pago.ControladorPago;;
 
 
 // Orquesta los flujos de negocio: listar, registrar, marcar como predeterminada y eliminar.
@@ -23,7 +23,7 @@ public class ControlDireccionesEnvio {
 
     private final VistaDireccionesEnvio vistaDireccionesEnvio;
     private final ServicioDireccionesEnvio servicioDireccionesEnvio;
-    private final ControlMetodoPago controlMetodoPago;
+    private final ControladorPago ControladorPago;
 
     private Cliente clienteActivo;
 
@@ -31,10 +31,10 @@ public class ControlDireccionesEnvio {
     @Autowired
     public ControlDireccionesEnvio(VistaDireccionesEnvio vistaDireccionesEnvio,
             ServicioDireccionesEnvio servicioDireccionesEnvio,
-            ControlMetodoPago controlMetodoPago) {
+            ControladorPago ControladorPago) {
         this.vistaDireccionesEnvio = vistaDireccionesEnvio;
         this.servicioDireccionesEnvio = servicioDireccionesEnvio;
-        this.controlMetodoPago = controlMetodoPago;
+        this.ControladorPago = ControladorPago;
     }
 
     // Garantiza que la vista conozca a su controlador inmediatamente después de la inyección de dependencias.
@@ -88,6 +88,6 @@ public class ControlDireccionesEnvio {
     // Transición de módulo. Al confirmar la dirección de envío,
     // cede el control de la aplicación al controlador de pagos, pasándole el contexto necesario.
     public void continuarAlPago(DireccionEnvio direccionSeleccionada) {
-        controlMetodoPago.iniciaVentanaMetodoPago(direccionSeleccionada);
+        ControladorPago.iniciaVentanaMetodoPago(clienteActivo.getidCliente());
     }
 }
