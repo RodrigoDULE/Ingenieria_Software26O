@@ -113,14 +113,14 @@ public class ProyectoApplication {
 
 	public void inicializaBDUsaurio() {
 		DatosDireccion dat = new DatosDireccion("null"," null"," null", "null"," null"," null"," null");
-		Cliente user = new Cliente("Predeterminado", 25);
+		Cliente user = new Cliente("Predeterminado", 25, null);
 
-		repositorioCliente.save(new Cliente("Valeria", 20));
-		repositorioCliente.save(new Cliente("Jose", 21));
-		repositorioCliente.save(new Cliente("Leonardo", 23));
-		repositorioCliente.save(new Cliente("Jean", 22));
-		repositorioCliente.save(new Cliente("Rodrigo", 27));
-		repositorioCliente.save(new Cliente("Humberto", 40));
+		repositorioCliente.save(new Cliente("Valeria", 20, null));
+		repositorioCliente.save(new Cliente("Jose", 21, null));
+		repositorioCliente.save(new Cliente("Leonardo", 23, null));
+		repositorioCliente.save(new Cliente("Jean", 22, null));
+		repositorioCliente.save(new Cliente("Rodrigo", 27, null));
+		repositorioCliente.save(new Cliente("Humberto", 40, null));
 
 		user = repositorioCliente.save(user);
 		DireccionEnvio direccionEnvio = new DireccionEnvio(dat, user);

@@ -45,7 +45,7 @@ public class ServicioPagoTest {
     @Test 
     void CompraVaciarCarrito(){
         //soy un cliente que tiene carrito con productos dentro de la tienda
-        Cliente falso = new Cliente("Rodrigo", 20);
+        Cliente falso = new Cliente("Rodrigo", 20, null);
         IntermediaCarritoProd intermedia = new IntermediaCarritoProd();
         carritoCompra carFalso = new carritoCompra();
 
@@ -70,7 +70,7 @@ public class ServicioPagoTest {
     @Test
     void CompraCarritoVacio(){
     //soy un cliente que tiene carrito con productos dentro de la tienda
-        Cliente falso = new Cliente("Rodrigo", 20);
+        Cliente falso = new Cliente("Rodrigo", 20, null);
         IntermediaCarritoProd intermedia = new IntermediaCarritoProd();
         carritoCompra carFalso = new carritoCompra();
 
@@ -88,7 +88,7 @@ public class ServicioPagoTest {
 
     @Test 
     void CompraProductoNoDisponible(){
-        Cliente falso = new Cliente("Rodrigo", 20);
+        Cliente falso = new Cliente("Rodrigo", 20, null);
         IntermediaCarritoProd intermedia = new IntermediaCarritoProd();
         carritoCompra carFalso = new carritoCompra();
 
