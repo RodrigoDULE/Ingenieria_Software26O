@@ -20,10 +20,13 @@ public class Cliente {
 
     private String nombre;
     private int edad;
+    private String contraseña;
 
-    public Cliente(String nombre, int edad){
+
+    public Cliente(String nombre, int edad, String contraseña){
         this.nombre = nombre;
         this.edad = edad;
+        this.contraseña = contraseña;
     }
 
     //cada cliente le pertenece cero o un carrito, dentro de la tabla de cliente se agregara una coluna especial llamda carrito_id, puede ser nulo o uno, es como una llave foranea
@@ -46,6 +49,8 @@ public class Cliente {
     public void setNombre(String nombre){this.nombre = nombre;}
     public int getEdad(){return edad;}
     public void setEdad(int edad){this.edad = edad;}
+    public String getContraseña(){return contraseña;}
+    public void setContraseña(String contraseña){this.contraseña = contraseña;}
     public carritoCompra getCarritoCompra(){return carrito;}
 
     //agregamos un setter para agregarle un carrito a la posesion del cliente
