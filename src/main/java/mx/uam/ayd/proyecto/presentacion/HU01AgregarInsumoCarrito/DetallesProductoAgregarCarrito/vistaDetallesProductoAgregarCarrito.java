@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox; // Añadiendo el selector de estrellas
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea; // Anañiendo la el comentario largo
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -19,7 +21,9 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Resena;
 
+import java.util.List; 
 /**
  * vistaDetallesProductoAgregarCarrito
  */
@@ -42,6 +46,21 @@ public class vistaDetallesProductoAgregarCarrito {
     private Button decrementarDetalles;
     @FXML
     private TextField cantidadTexto;
+    /*
+    ============================
+    NUEVOS COMPONENTES FXML PARA LA SECCIÓN DE RESENAS
+    ============================
+
+    */
+    @FXML
+    private TextField campoTituloResena;     // Caja de texto para el título de la reseña
+    @FXML
+    private TextArea campoComentarioResena;   // Caja de texto grande para el comentario
+    @FXML
+    private ComboBox<Integer> comboCalificacion; // Selector de 1 a 5 estrellas
+    @FXML
+    private Button botonPublicarResena;     // Botón para enviar la reseña  
+
     
     private int contador = 1;
     private Producto actual;
@@ -120,9 +139,19 @@ public class vistaDetallesProductoAgregarCarrito {
         cantidadTexto.setText(String.valueOf(contador));
         cantidadTexto.setDisable(true);
 
-        stage.show();
+
+    /* NIUEVO INICIALIZAR EL COMBOBOX DE CALIFICACION ( 1 A 5 ESTRELLAS)  */
+    if(comboCalificacion !=null){
+        comboCalificacion.getItems().clear();
+            comboCalificacion.getItems().addAll(1, 2, 3, 4, 5);
+            comboCalificacion.setValue(5); // Valor por defecto en 5 estrellas
     }
 
+    //Esto es para limpiar los campos cada vez que se abre un nuevo producto
+        if(campoTituloResena != null) campoTituloResena.clear();
+        if(campoComentarioResena != null) campoComentarioResena.clear();
+        stage.show();
+    }
     //validacion de seleccion de cantidad correcta
     @FXML
     private void handleIncrementarDecrementar(ActionEvent event){
@@ -160,7 +189,33 @@ public class vistaDetallesProductoAgregarCarrito {
             controlDetalles.visitaCarritoCompra();
         }
     }
-    
+    /* ==================
+    ** 
+    ** NUEVO:ACCION DEL BOTON PARA PUBLICAR LA RESENA DESDE VISTA 
+    ** 
+     ================= */ 
+    @FXML 
+    private void handlePublicarResena(){
+        if (controlDetalles != null) {
+            try {
+                // Obtenemos los valores de los componentes de la interfaz
+                int calificacion = comboCalificacion.getValue() != null ? comboCalificacion.getValue() : 5;
+                String titulo = campoTituloResena.getText();
+                String comentario = campoComentarioResena.getText();
+
+                // Llamamos al método del controlador que se comunica con el Servicio de Negocio
+                controlDetalles.publicarResena(actual, calificacion, titulo, comentario);
+                
+                // Limpiamos los campos después de publicar con éxito
+                campoTituloResena.clear();
+                campoComentarioResena.clear();
+                comboCalificacion.setValue(5);
+
+            } catch (Exception e) {
+                mostrarMensaje("Error al recolectar los datos de la reseña: " + e.getMessage());
+            }
+        }
+    }
     //Metodo para mostrar mensajes flotantes
     public void mostrarMensaje(String mensaje){
         if (!Platform.isFxApplicationThread()) {
@@ -175,4 +230,10 @@ public class vistaDetallesProductoAgregarCarrito {
 		alert.showAndWait();
     }
 
+    // Método para mostrar las reseñas en la interfaz gráfica
+    public void mostrarResenasEnPantalla(List<Resena> listaResenas) {
+        // Aquí puedes desplegar las reseñas en consola o en un contenedor visual si lo tienes
+        System.out.println("Mostrando " + (listaResenas != null ? listaResenas.size() : 0) + " reseñas para este producto.");
+        
+    }   // Si tienes un VBox u otro contenedor en tu FXML para las reseñas, lo limpiarías y llenarías aquí.
 }

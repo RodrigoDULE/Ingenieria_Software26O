@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
@@ -39,5 +41,18 @@
       <Button fx:id="decrementarDetalles" styleClass="primary-button" layoutX="341.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleIncrementarDecrementar" prefHeight="25.0" prefWidth="34.0" text="-" />
       <Text fx:id="piezasDetalles" fill="#dd0e0e" layoutX="354.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hay 15 piezas disponibles dentro de stock" />
       <Button fx:id="irCarrito" styleClass="primary-button" layoutX="517.0" layoutY="16.0" onAction="#handleIrCarrito" mnemonicParsing="false" text="Ir carrito" />
+ 
+   <!-- Nuevos COMPONENTES PARA LA RESENA -->
+   
+   
+   <Text fill="#144d03" layoutX="21.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deja tu Reseña:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="comboCalificacion" layoutX="21.0" layoutY="342.0" prefHeight="25.0" prefWidth="70.0" promptText="Estrellas" />
+      <TextField fx:id="campoTituloResena" layoutX="100.0" layoutY="342.0" prefHeight="25.0" prefWidth="120.0" promptText="Título de reseña" />
+      <TextArea fx:id="campoComentarioResena" layoutX="21.0" layoutY="371.0" prefHeight="25.0" prefWidth="199.0" promptText="Escribe un comentario..." />
+      <Button fx:id="botonPublicarResena" styleClass="primary-button" layoutX="226.0" layoutY="371.0" mnemonicParsing="false" onAction="#handlePublicarResena" text="Publicar" />
    </children>
 </Pane>
