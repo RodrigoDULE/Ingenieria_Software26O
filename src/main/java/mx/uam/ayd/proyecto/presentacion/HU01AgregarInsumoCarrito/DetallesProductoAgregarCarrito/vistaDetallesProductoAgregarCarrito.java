@@ -16,6 +16,7 @@ import javafx.scene.control.TextArea; // Anañiendo la el comentario largo
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -60,6 +61,8 @@ public class vistaDetallesProductoAgregarCarrito {
     private ComboBox<Integer> comboCalificacion; // Selector de 1 a 5 estrellas
     @FXML
     private Button botonPublicarResena;     // Botón para enviar la reseña  
+    @FXML 
+    private VBox contenedorResenas; 
 
     
     private int contador = 1;
@@ -109,6 +112,11 @@ public class vistaDetallesProductoAgregarCarrito {
     }
 
     public void muestraDetallesProd(Producto producto) {
+        this.actual=producto;
+        if(controlDetalles != null){
+            List<Resena> resenas = controlDetalles.obtenerResenas(producto);
+            mostrarResenasEnPantalla(resenas);
+        }
         contador = 1;
         actual = producto;
 
@@ -233,7 +241,43 @@ public class vistaDetallesProductoAgregarCarrito {
     // Método para mostrar las reseñas en la interfaz gráfica
     public void mostrarResenasEnPantalla(List<Resena> listaResenas) {
         // Aquí puedes desplegar las reseñas en consola o en un contenedor visual si lo tienes
-        System.out.println("Mostrando " + (listaResenas != null ? listaResenas.size() : 0) + " reseñas para este producto.");
+        //System.out.println("Mostrando " + (listaResenas != null ? listaResenas.size() : 0) + " reseñas para este producto.");
+        if(contenedorResenas==null){
+            return; 
+        }
+        contenedorResenas.getChildren().clear();
+        if (listaResenas == null || listaResenas.isEmpty()) {
+        Text mensajeVacio = new Text("Aún no hay reseñas para este producto. ¡Sé el primero en opinar!");
+        mensajeVacio.setStyle("-fx-fill: #7f8c8d; -fx-font-style: italic;");
+        contenedorResenas.getChildren().add(mensajeVacio);
+        return;
+    }
+
+    // Iteramos sobre cada reseña guardada para dibujarla en pantalla
+        for (Resena r : listaResenas) {
+             VBox tarjeta = new VBox(4);
+            tarjeta.setStyle("-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 6; -fx-border-color: #e0e0e0; -fx-border-radius: 6;");
+
+            // Generamos las estrellas visuales (ej. ★★★★★)
+            int estrellasCount = r.getCalificacion();
+            String estrellasStr = "★".repeat(Math.max(0, estrellasCount)) + "☆".repeat(Math.max(0, 5 - estrellasCount));
         
+             javafx.scene.text.Text lblEstrellas = new javafx.scene.text.Text(estrellasStr);
+            lblEstrellas.setStyle("-fx-fill: #f39c12; -fx-font-size: 14px; -fx-font-weight: bold;");
+
+            javafx.scene.text.Text lblTitulo = new javafx.scene.text.Text(r.getTitulo());
+            lblTitulo.setStyle("-fx-font-weight: bold; -fx-font-size: 13px;");
+
+            javafx.scene.text.Text lblComentario = new javafx.scene.text.Text(r.getComentario());
+            lblComentario.setStyle("-fx-font-size: 12px;");
+            lblComentario.setWrappingWidth(500); // Para que el texto ajuste el ancho de la tarjeta
+
+             tarjeta.getChildren().addAll(lblEstrellas, lblTitulo, lblComentario);
+            contenedorResenas.getChildren().add(tarjeta);
+        }
     }   // Si tienes un VBox u otro contenedor en tu FXML para las reseñas, lo limpiarías y llenarías aquí.
+
+
 }
+
+
