@@ -73,7 +73,7 @@ public class controladorDetallesProductoAgregarCarrito {
             // Llamamos a la lógica de negocio que valida y guarda
             servicioResena.crearResena(calificacion, titulo, comentario, producto);
             //Esto permite alojar el comenntario 
-            // Usamos el método de mensajes que ya usa tu vista
+            // Usamos el método de mensajes que ya usa la parte de vista 
             vistaDetalle.mostrarMensaje("¡Reseña publicada con éxito!");
 
             List<Resena> resenasActualizadas = servicioResena.obtenerResenasPorProducto(producto);
