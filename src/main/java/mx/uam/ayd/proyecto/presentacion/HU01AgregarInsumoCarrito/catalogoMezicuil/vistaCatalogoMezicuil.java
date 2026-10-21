@@ -20,7 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
 import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
@@ -37,6 +39,7 @@ public class vistaCatalogoMezicuil {
     private Scene scene;
     private boolean inicializado = false;
     private controladorCatalogoMezicuil controlCatalgo;
+    private boolean mostrandoFavoritos = false;
 
     @FXML
     private TextField buscaProducto;
@@ -96,10 +99,20 @@ public class vistaCatalogoMezicuil {
         this.controlCatalgo = control;
     }
 
+      //recibe la lista de productos y solicita que se muestren como tarjetas del catálogo
     public void muestra(List<Producto> prod) {
+        mostrarProductos(prod, false);
+    }
 
+    // reutilizando la creación de tarjetas para mostrar solamente  los favoritos del cliente en el apartado de favoritos
+    public void muestraFavoritos(List<Producto> productosFavoritos) {
+        mostrarProductos(productosFavoritos, true);
+    }
+
+    // muestra en pantalla la lista recibida y muestra un mensaje cuando la sección de favoritos está vacía
+    private void mostrarProductos(List<Producto> prod, boolean esVistaFavoritos) {
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> muestra(prod));
+            Platform.runLater(() -> mostrarProductos(prod, esVistaFavoritos));
             return;
         }
 
@@ -108,8 +121,16 @@ public class vistaCatalogoMezicuil {
         stage.setScene(scene);
         //GEnerado por IA
         stage.setTitle("Catalogo Mezicuil");
-        // Borramos todo lo que este dentro de la ventana
+        // borramos todo lo que este dentro de la ventana
         contenedorProductos.getChildren().clear();
+        mostrandoFavoritos = esVistaFavoritos;
+
+        if (esVistaFavoritos && prod.isEmpty()) {
+            // le dice al cliente que todavía no ha agregado productos a favoritos
+            Label mensajeVacio = new Label("Todavía no hay productos agregados a favoritos.");
+            mensajeVacio.getStyleClass().add("empty-favorites-message");
+            contenedorProductos.getChildren().add(mensajeVacio);
+        }
 
         for (Producto p : prod) {
             VBox tarjeta = new VBox();
@@ -126,7 +147,13 @@ public class vistaCatalogoMezicuil {
             imagen.setFitHeight(140);
             imagen.setFitWidth(120);
             imagen.setPreserveRatio(true);
-            tarjeta.getChildren().addAll(imagen, nombre, precio);
+
+            // La imagen y el corazón de "favoritos" comparten el mismo espacio para superponer el botón
+            StackPane imagenConFavorito = new StackPane(imagen);
+            Button botonFavorito = crearBotonFavorito(p);
+            StackPane.setAlignment(botonFavorito, Pos.TOP_RIGHT);
+            imagenConFavorito.getChildren().add(botonFavorito);
+            tarjeta.getChildren().addAll(imagenConFavorito, nombre, precio);
 
             // Aqui agregamos los productos en el contenedor
             contenedorProductos.getChildren().add(tarjeta);
@@ -141,7 +168,7 @@ public class vistaCatalogoMezicuil {
         }
 
         // Añadimos el boton del bot
-        if (gestionCliente.getInstance().getIdActivo() == 6) {
+        if (!esVistaFavoritos && gestionCliente.getInstance().getIdActivo() == 6) {
             Button bot = new Button("Bot");
             // agregamos una tarjeta de bot
             VBox tarjeta = new VBox();
@@ -161,6 +188,50 @@ public class vistaCatalogoMezicuil {
 
         // boxTodo.setSelected(true);
         stage.show();
+    }
+
+    // para favoritos:
+    // crea el corazón con el estado guardado y conecta la acción con el controlador
+    private Button crearBotonFavorito(Producto producto) {
+        Button boton = new Button();
+        boton.getStyleClass().add("favorite-button");
+        boton.setFocusTraversable(false);
+        boton.setAccessibleText("Marcar como favorito");
+
+        boolean esFavorito = controlCatalgo != null && controlCatalgo.esFavorito(producto);
+        boton.setUserData(esFavorito);
+        actualizarAparienciaFavorito(boton, esFavorito);
+
+        // Evita que el clic del corazón también abra los detalles de la tarjeta...
+        // cosa que sí pasaba al darle click a tarjeta que mostraba cada mezcal
+        boton.addEventHandler(MouseEvent.MOUSE_CLICKED, MouseEvent::consume);
+        boton.setOnAction(evento -> {
+            boolean estadoActual = Boolean.TRUE.equals(boton.getUserData());
+            if (controlCatalgo != null && controlCatalgo.cambiarEstadoFavorito(producto, estadoActual)) {
+                boolean nuevoEstado = !estadoActual;
+                boton.setUserData(nuevoEstado);
+                actualizarAparienciaFavorito(boton, nuevoEstado);
+                if (mostrandoFavoritos && estadoActual) {
+                    // Al quitar un favorito desde esta sección, actualiza la lista y el mensaje vacío si aplica.
+                    controlCatalgo.mostrarFavoritos();
+                }
+            } else {
+                mostrarMensaje("No se pudo actualizar el favorito. Verifica que hayas iniciado sesión.");
+            }
+        });
+
+        return boton;
+    }
+
+    //actualiza la presentacion del botón para que coincida con si el producto está marcado como favorito o no
+    // Mantiene el símbolo, el color y el texto accesible sincronizados con el estado guardado en la base de datos
+    private void actualizarAparienciaFavorito(Button boton, boolean esFavorito) {
+        boton.setText(esFavorito ? "\u2665" : "\u2661");
+        boton.setAccessibleText(esFavorito ? "Quitar de favoritos" : "Marcar como favorito");
+        boton.getStyleClass().remove("favorite-button-selected");
+        if (esFavorito) {
+            boton.getStyleClass().add("favorite-button-selected");
+        }
     }
 
     // validamos el criterio por el cual el cliente quiere el producto
@@ -207,6 +278,14 @@ public class vistaCatalogoMezicuil {
     private void handleIrCarrito() {
         if (controlCatalgo != null) {
             controlCatalgo.irCarrito();
+        }
+    }
+
+    // reenvía al controlador la solicitud de mostrar los favoritos del cliente activo
+    @FXML
+    private void handleMostrarFavoritos() {
+        if (controlCatalgo != null) {
+            controlCatalgo.mostrarFavoritos();
         }
     }
 

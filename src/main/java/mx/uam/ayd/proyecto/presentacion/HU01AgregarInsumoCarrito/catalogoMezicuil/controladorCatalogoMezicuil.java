@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
+import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
+import mx.uam.ayd.proyecto.negocio.ServicioFavorito;
 import mx.uam.ayd.proyecto.negocio.servicioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.controladorDetallesProductoAgregarCarrito;
@@ -30,13 +32,15 @@ public class controladorCatalogoMezicuil {
     private final controladorDetallesProductoAgregarCarrito controlDetalles;
 
     private final ControladorBot ctrlBot;
+    private final ServicioFavorito servicioFavorito;
 
-    public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto, controladorDetallesProductoAgregarCarrito controlDetalles, ControladorBot ctrl){
+    public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto, controladorDetallesProductoAgregarCarrito controlDetalles, ControladorBot ctrl, ServicioFavorito servicioFavorito){
         this.controlDetalles = controlDetalles;
         this.vistaDetallesProducto = vistaDetallesProducto;
         this.servicioProducto = servicioProducto;
         this.vistaCatalogo = vistaCatalogo;
         this.ctrlBot = ctrl;
+        this.servicioFavorito = servicioFavorito;
     } 
 
 
@@ -96,6 +100,29 @@ public class controladorCatalogoMezicuil {
 
     public void irCarrito(){
         controlDetalles.visitaCarritoCompra();
+    }
+
+    //  aquí obtiene los productos favoritos del cliente activo y los envía a la vista del catálogo
+    public void mostrarFavoritos() {
+        long idCliente = gestionCliente.getInstance().getIdActivo();
+        List<Producto> productosFavoritos = servicioFavorito.obtenerProductosFavoritos(idCliente);
+        vistaCatalogo.muestraFavoritos(productosFavoritos);
+    }
+
+    // consulta si el cliente activo ya guardó este producto como favorito
+    public boolean esFavorito(Producto producto) {
+        long idCliente = gestionCliente.getInstance().getIdActivo();
+        return servicioFavorito.esFavorito(idCliente, producto.getidProducto());
+    }
+
+    // intenta guardar el cambio del corazon y devuelve "true" o "false" para avisar si lo logró o no
+    public boolean cambiarEstadoFavorito(Producto producto, boolean yaEsFavorito) {
+        long idCliente = gestionCliente.getInstance().getIdActivo();
+        long idProducto = producto.getidProducto();
+
+        return yaEsFavorito
+                ? servicioFavorito.quitarFavorito(idCliente, idProducto)
+                : servicioFavorito.agregarFavorito(idCliente, idProducto);
     }
 
     public void EnviarBot(){

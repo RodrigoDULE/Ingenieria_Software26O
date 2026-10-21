@@ -85,6 +85,31 @@
     -fx-alignment: center;
 }
 
+.empty-favorites-message {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5d3927;
+    -fx-padding: 24;
+}
+
+/* El botón queda superpuesto en la esquina superior derecha de la imagen del producto, en la tarjeta de cada mezcal */
+.favorite-button {
+    -fx-background-color: rgba(255, 255, 255, 0.92);
+    -fx-text-fill: #8a8178;
+    -fx-font-size: 20px;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+    -fx-padding: 0;
+    -fx-background-radius: 50%;
+    -fx-cursor: hand;
+}
+
+.favorite-button-selected {
+    -fx-text-fill: #d94336;
+}
+
 .summary-card {
     -fx-background-color: #fffef9;
     -fx-background-radius: 12;

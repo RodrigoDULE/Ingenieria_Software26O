@@ -2,6 +2,9 @@ package mx.uam.ayd.proyecto.negocio;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import mx.uam.ayd.proyecto.datos.RepositorioFavorito;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
@@ -79,5 +82,18 @@ public class ServicioFavorito {
 
         
         return true; // si es true entonces indica que se quitó el favorito
+    }
+
+    // permite a la vista conocer el estado inicial del corazón para este cliente y producto
+    public boolean esFavorito(long idCliente, long idProducto) {
+        return repositorioFavorito
+                .existsByClienteFK_IdClienteAndProductoFK_IdProducto(idCliente, idProducto);
+    }
+
+    // recupera los productos relacionados con los favoritos del cliente para mostrarlos en el catálogo
+    public List<Producto> obtenerProductosFavoritos(long idCliente) {
+        return repositorioFavorito.findByClienteFK_IdCliente(idCliente).stream()
+                .map(Favorito::getProductoFK)
+                .collect(Collectors.toList());
     }
 }
