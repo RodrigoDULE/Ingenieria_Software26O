@@ -17,7 +17,7 @@ public class servicioProducto {
         this.repoProd = repoProd;
     }
 
-    public Producto agregarProducto(String nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen, int volumen, String tipoAgave, String region){
+    public Producto agregarProducto(String nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen,  String tipoAgave, String region){
 
         //Validaciones campos de texto
         if (nombre == null || nombre.trim().isEmpty())
@@ -39,7 +39,7 @@ public class servicioProducto {
             throw new IllegalArgumentException("El stock inicial debe ser mayor que cero");
         }
 
-        Producto nuevoProducto = new Producto(nombre, precio, Descripcion,CantidadStock,contenidoMCL,GradoAlcohol,tipoProd,imagen,volumen, tipoAgave,region);
+        Producto nuevoProducto = new Producto(nombre, precio, Descripcion,CantidadStock,contenidoMCL,GradoAlcohol,tipoProd,imagen, tipoAgave,region);
 
 
         return repoProd.save(nuevoProducto); 

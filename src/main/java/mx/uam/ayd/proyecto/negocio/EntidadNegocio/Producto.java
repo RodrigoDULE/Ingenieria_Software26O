@@ -26,7 +26,7 @@ public class Producto {
     private String imagen;
     private String tipoAgave;
     private String region;
-    private int volumen;
+
 
 
 
@@ -44,9 +44,9 @@ public class Producto {
     }
     
     //Sobrecarga de constructor para nuevos atributos en catálogo (HU-01)
-    public Producto(String nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen, int volumen, String tipoAgave, String region){
+    public Producto(String nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen, String tipoAgave, String region){
         this(nombre,precio,Descripcion,CantidadStock,contenidoMCL,GradoAlcohol,tipoProd,imagen);
-        this.volumen = volumen;
+        
         this.tipoAgave = tipoAgave;
         this.region = region;
     } 
@@ -77,7 +77,7 @@ public class Producto {
     public String getRutaImagen(){ return imagen;}
     public String gettipoAgave(){ return tipoAgave;}
     public String getregion(){ return region;}
-    public int getvolumen(){ return volumen;}
+  
     
     
     //Solo es prueba para agregar dueño al producto
@@ -102,7 +102,7 @@ public class Producto {
     public void setDetalleCompra(List<DetallesCompra> detalleCompra){this.detalleCompra = detalleCompra;}
     public void settipoAgave(String tipoAgave){this.tipoAgave=tipoAgave;}
     public void setregion(String region){ this.region=region;}
-    public void setvolumen(int volumen){ this.volumen=volumen;}
+   
 
     //generado **IA**
     @Override

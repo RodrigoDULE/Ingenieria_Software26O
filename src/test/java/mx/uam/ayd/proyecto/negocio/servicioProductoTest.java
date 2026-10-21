@@ -109,13 +109,13 @@ public class servicioProductoTest {
         String region = "Oaxaca";
 
         //Simulación de producto 
-        Producto productoGuardado = new Producto(nombre, precio, Descripcion, CantidadStock, contenidoMCL, GradoAlcohol, tipoProd, imagen, volumen, tipoAgave, region);
+        Producto productoGuardado = new Producto(nombre, precio, Descripcion, CantidadStock, contenidoMCL, GradoAlcohol, tipoProd, imagen, tipoAgave, region);
 
         //Configuración de mock
         when(repoProd.save(org.mockito.ArgumentMatchers.any(Producto.class))).thenReturn(productoGuardado);
 
         //Cuando el repositorio llame a "save", retorna productoGuardado
-        Producto resultado = servProd.agregarProducto(nombre, precio, Descripcion, CantidadStock, contenidoMCL, GradoAlcohol, tipoProd, imagen, volumen, tipoAgave, region);
+        Producto resultado = servProd.agregarProducto(nombre, precio, Descripcion, CantidadStock, contenidoMCL, GradoAlcohol, tipoProd, imagen,  tipoAgave, region);
 
         //Entonces verificamos que el comportamiento sea el esperado
         assertNotNull(resultado, "El producto devuelto no debería ser nulo");
@@ -131,19 +131,19 @@ public class servicioProductoTest {
     // Escenario 2: Validar fallo por campo de texto vacío (Nombre)
         assertThrows(IllegalArgumentException.class, () -> {
             // Intentamos guardar un producto con el nombre vacío ("")
-            servProd.agregarProducto("", 500.50f, "Descripción válida", 20, 750, 40.0f, "Mezcales", "ruta.jpg", 750, "Espadín", "Oaxaca");
+            servProd.agregarProducto("", 500.50f, "Descripción válida", 20, 750, 40.0f, "Mezcales", "ruta.jpg", "Espadín", "Oaxaca");
         });
 
     // Escenario 3: Validar fallo por precio inválido (<= 0)
         assertThrows(IllegalArgumentException.class, () -> {
             // Intentamos guardar un producto con precio de 0
-            servProd.agregarProducto("Mezcal Válido", 0.0f, "Descripción válida", 20, 750, 40.0f, "Mezcales", "ruta.jpg", 750, "Espadín", "Oaxaca");
+            servProd.agregarProducto("Mezcal Válido", 0.0f, "Descripción válida", 20, 750, 40.0f, "Mezcales", "ruta.jpg",  "Espadín", "Oaxaca");
         });
 
         // Escenario 4: Validar fallo por stock inválido 
         assertThrows(IllegalArgumentException.class, () -> {
             // Intentamos guardar un producto con stock de 0
-            servProd.agregarProducto("Mezcal Válido", 500.50f, "Descripción válida", 0, 750, 40.0f, "Mezcales", "ruta.jpg", 750, "Espadín", "Oaxaca");
+            servProd.agregarProducto("Mezcal Válido", 500.50f, "Descripción válida", 0, 750, 40.0f, "Mezcales", "ruta.jpg",  "Espadín", "Oaxaca");
         });
         
         // Verificación de que el repositorio NUNCA fue llamado para guardar
