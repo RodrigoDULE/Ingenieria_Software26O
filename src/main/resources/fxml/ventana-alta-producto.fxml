@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox alignment="TOP_CENTER" spacing="18.0">
+         <padding>
+            <Insets bottom="25.0" left="30.0" right="30.0" top="25.0" />
+         </padding>
+         <children>
+            <!-- Encabezado de la Ventana -->
+            <Label text="Alta de Nuevo Producto - Mezicuil">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Complete todos los campos obligatorios para habilitar el registro en el catálogo." textFill="#555555" />
+
+            <!-- Formulario en Cuadrícula (GridPane) -->
+            <GridPane hgap="15.0" vgap="12.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0" prefWidth="170.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="250.0" prefWidth="340.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="32.0" prefHeight="35.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <!-- 1. Nombre -->
+                  <Label text="Nombre del Producto *:" GridPane.rowIndex="0" />
+                  <TextField fx:id="txtNombre" onKeyReleased="#verificarCampos" promptText="Ej. Mezcal Espadín Artesanal" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                  <!-- 2. Categoría -->
+                  <Label text="Categoría *:" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbCategoria" maxWidth="1.7976931348623157E308" onAction="#verificarCampos" promptText="Seleccione una categoría" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                  <!-- 3. Precio Unitario -->
+                  <Label text="Precio Unitario ($) *:" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtPrecio" onKeyReleased="#verificarCampos" promptText="Mayor a 0 (Ej. 450.00)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                  <!-- 4. Stock Inicial -->
+                  <Label text="Stock Inicial *:" GridPane.rowIndex="3" />
+                  <TextField fx:id="txtStock" onKeyReleased="#verificarCampos" promptText="Mayor a 0 (Ej. 20)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                  <!-- 5. Descripción -->
+                  <Label text="Descripción *:" GridPane.rowIndex="4" />
+                  <TextField fx:id="txtDescripcion" onKeyReleased="#verificarCampos" promptText="Descripción detallada del producto" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                  <!-- 6. Contenido (mL) -->
+                  <Label text="Contenido (mL) *:" GridPane.rowIndex="5" />
+                  <TextField fx:id="txtContenidoMCL" onKeyReleased="#verificarCampos" promptText="Ej. 750" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                  <!-- 7. Grado de Alcohol -->
+                  <Label text="Grados de Alcohol (%) *:" GridPane.rowIndex="6" />
+                  <TextField fx:id="txtGradoAlcohol" onKeyReleased="#verificarCampos" promptText="Ej. 45.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+                  <!-- 8. Tipo de Agave (Fila 7 exacta para ambos) -->
+                  <Label text="Tipo de Agave *:" GridPane.rowIndex="7" />
+                  <TextField fx:id="txtTipoAgave" onKeyReleased="#verificarCampos" promptText="Ej. Espadín / Tobalá / N/A" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+                  <!-- 9. Región (Fila 8 exacta para ambos) -->
+                  <Label text="Región de Origen *:" GridPane.rowIndex="8" />
+                  <TextField fx:id="txtRegion" onKeyReleased="#verificarCampos" promptText="Ej. Oaxaca / Guerrero" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+                  <!-- 10. Selección de Fotografía desde la PC (Fila 9 exacta para ambos) -->
+                  <Label text="Fotografía del Producto *:" GridPane.rowIndex="9" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                     <children>
+                        <TextField fx:id="txtImagen" editable="false" promptText="Ningún archivo seleccionado" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="btnSeleccionarImagen" mnemonicParsing="false" onAction="#handleSeleccionarImagen" text="Seleccionar foto..." />
+                     </children>
+                  </HBox>
+               </children>
+                </GridPane>
+
+            <!-- Botones de Acción -->
+            <HBox alignment="CENTER" spacing="25.0">
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+               <children>
+                  <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelar" prefHeight="38.0" prefWidth="150.0" text="Cancelar / Volver" />
+                  <Button fx:id="btnGuardar" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#handleGuardarProducto" prefHeight="38.0" prefWidth="170.0" style="-fx-font-weight: bold;" text="Guardar y Publicar" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
