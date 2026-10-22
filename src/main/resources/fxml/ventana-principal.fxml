@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fx:id="textoPrincipal" fill="#949494" layoutX="47.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido, Usuario">
          <font>
@@ -81,5 +81,17 @@
             <Font name="Serif Bold" size="13.0" />
          </font>
       </Text>
+      <Button fx:id="AltaProducto" layoutX="47.0" layoutY="385.0" mnemonicParsing="false" onAction="#revisarInventario" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: #d9f4ff;" text="Alta de Productos (Inventario)">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.1411764770746231" green="0.4745098054409027" blue="0.7647058963775635" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </Button>
    </children>
 </Pane>

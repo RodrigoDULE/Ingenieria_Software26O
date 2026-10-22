@@ -17,6 +17,34 @@ public class servicioProducto {
         this.repoProd = repoProd;
     }
 
+    public Producto agregarProducto(String nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen,  String tipoAgave, String region){
+
+        //Validaciones campos de texto
+        if (nombre == null || nombre.trim().isEmpty())
+        {throw new IllegalArgumentException("El nombre no puede ser nulo o estar vacío");}
+
+        if (tipoProd == null || tipoProd.trim().isEmpty())
+        {throw new IllegalArgumentException("El tipo de producto no puede ser nulo o estar vacío");}
+
+        if (Descripcion == null || Descripcion.trim().isEmpty())
+        {throw new IllegalArgumentException("El tipo de producto no puede ser nulo o estar vacío");}
+        
+        // Validaciones numéricas
+
+        if(precio <= 0){
+            throw new IllegalArgumentException("El precio unitario debe ser mayor que cero");
+        }
+
+        if(CantidadStock <= 0){
+            throw new IllegalArgumentException("El stock inicial debe ser mayor que cero");
+        }
+
+        Producto nuevoProducto = new Producto(nombre, precio, Descripcion,CantidadStock,contenidoMCL,GradoAlcohol,tipoProd,imagen, tipoAgave,region);
+
+
+        return repoProd.save(nuevoProducto); 
+    }
+
     public List<Producto> obtenerProductosDisponibles(){
         List<Producto> todoProducto = new ArrayList<Producto>();
 
