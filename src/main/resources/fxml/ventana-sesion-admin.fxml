@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="textoPrincipal" fill="#949494" layoutX="47.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido, Administrador">
+         <font>
+            <Font name="Serif Bold" size="26.0" />
+         </font>
+      </Text>
+      <Button fx:id="IngresarTienda" layoutX="47.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleVisitarTiendaLinea" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #d9f4ff;" text="TiendaLinea" textAlignment="CENTER">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Button fx:id="AgregarEvento" layoutX="191.0" layoutY="223.0" mnemonicParsing="false" onAction="#agendarEvento" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #d9f4ff;" text="Evento">
+         <font>
+            <Font name="Serif Bold" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <ImageView fitHeight="293.0" fitWidth="240.0" layoutX="324.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagenes/imagenPrincipal.jpeg" />
+         </image>
+      </ImageView>
+      <Text fill="#efffbd" layoutX="47.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa tu Nombre">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font></Text>
+      <TextField fx:id="ingresarUsuario" layoutX="47.0" layoutY="79.0" prefHeight="26.0" prefWidth="240.0" />
+      <Button defaultButton="true" layoutX="213.0" layoutY="176.0" mnemonicParsing="false" onAction="#ingresarUsuario" text="Ingresar">
+         <font>
+            <Font name="Serif Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="ingresarFormularioMarketing" layoutX="48.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: #d9f4ff;" text="Formulario de Marketing">
+         <font>
+            <Font name="Serif Bold" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.1411764770746231" green="0.4745098054409027" blue="0.7647058963775635" />
+               </color></InnerShadow>
+         </effect>
+      </Button>
+      <Button fx:id="RevisionPedidos" layoutX="47.0" layoutY="355.0" mnemonicParsing="false" onAction="#iniciarRevisionOrdenes" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: #d9f4ff;" text="Revision de Pedidos">
+         <font>
+            <Font name="Serif Bold" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.1411764770746231" green="0.4745098054409027" blue="0.7647058963775635" />
+               </color></InnerShadow>
+         </effect>
+      </Button>
+      <Text fill="#e3ebc8" layoutX="50.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar Recepción de Carga">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtOrdenId" layoutX="252.0" layoutY="416.0" onAction="#iniciarRecepcionCarga" prefHeight="30.0" prefWidth="43.0" />
+      <Text fx:id="TexoRecepcion" fill="WHITE" layoutX="51.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce el id de la orden">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#efffbd" layoutX="47.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa tu contraseña">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="ingresarUsuario1" layoutX="47.0" layoutY="132.0" prefHeight="26.0" prefWidth="240.0" />
+      <Button fx:id="ingresarFormularioMarketing1" layoutX="48.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: #d9f4ff;" text="Gestion de Inventario">
+         <font>
+            <Font name="Serif Bold" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.1411764770746231" green="0.4745098054409027" blue="0.7647058963775635" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </Button>
+   </children>
+</Pane>
