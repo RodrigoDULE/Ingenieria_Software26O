@@ -37,12 +37,12 @@
             <Label layoutX="202.0" layoutY="50.0" prefHeight="83.0" prefWidth="274.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text=" Selecciona tu perfil para ingresar" textFill="#f5f5f5" />
             <ImageView fitHeight="289.0" fitWidth="274.0" layoutX="81.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Documentos/INGSofware/Ingenieria_Software26O/src/main/resources/Imagenes/mezicuil_admin.jpg" />
+                  <Image url="@../Imagenes/mezicuil_admin.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="289.0" fitWidth="217.0" layoutX="389.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Documentos/INGSofware/Ingenieria_Software26O/src/main/resources/Imagenes/mezicuil_cliente.jpg" />
+                  <Image url="@../Imagenes/mezicuil_cliente.jpg" />
                </image>
             </ImageView>
          </children>
