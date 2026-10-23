@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.JoinColumn; 
 @Entity 
 public class Resena {
 
@@ -16,10 +16,14 @@ public class Resena {
     private int calificacion; // De 1 a 5 estrellas
     private String titulo;
     private String comentario;
-
+    // Relacion: Muchas reseñas pertenecen a un producto
     @ManyToOne
-    private Producto producto; // Aquí depende de que tu clase Producto exista y esté importada si es de otro paquete
-
+    @JoinColumn(name="producto_id")
+    private Producto producto; 
+    //Relacion: Muchas reseñas pertenecen a un usuario 
+    @ManyToOne
+    @JoinColumn(name="cliente_id")
+    private Cliente cliente; 
     // Constructor vacío obligatorio para JPA
     public Resena() {
     }
@@ -46,5 +50,8 @@ public class Resena {
 
     public Producto getProducto() { return producto; }
     public void setProducto(Producto producto) { this.producto = producto; }
+
+    public Cliente getCliente() { return cliente; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
 }
 
