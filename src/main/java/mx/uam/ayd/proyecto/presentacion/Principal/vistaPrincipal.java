@@ -33,6 +33,9 @@ public class vistaPrincipal {
     private Button RevisionPedidos;
 
     @FXML
+    private Button AltaProducto;
+
+    @FXML
     private Button AgregarEvento;
 
     @FXML
@@ -103,11 +106,12 @@ public class vistaPrincipal {
             IngresarTienda.setDisable(true);
             AgregarEvento.setDisable(true);
             RevisionPedidos.setVisible(false);
+            AltaProducto.setVisible(false);
             ingresarFormularioMarketing.setVisible(false);
             txtOrdenId.setVisible(false);
             //TextoRecepcion.setVisible(false);
 
-            ingresarUsuario.setText("");
+            ingresarUsuario.setText("Predeterminado");
             stage.show();
         } else {
             System.out.println("Intentando abrir la ventana principal");
@@ -121,6 +125,7 @@ public class vistaPrincipal {
             IngresarTienda.setDisable(false);
             AgregarEvento.setDisable(false);
             RevisionPedidos.setVisible(true);
+            AltaProducto.setVisible(true);
             //TextoRecepcion.setVisible(true);
             ingresarFormularioMarketing.setVisible(true);
             ingresarUsuario.setDisable(false);
@@ -144,7 +149,9 @@ public class vistaPrincipal {
     @FXML
     private void revisarInventario() {
         if (control != null) {
-
+            control.revisarInventario();
+        } else {
+            System.err.println("Error: controladorPrincipal no está inyectado.");
         }
     }
 

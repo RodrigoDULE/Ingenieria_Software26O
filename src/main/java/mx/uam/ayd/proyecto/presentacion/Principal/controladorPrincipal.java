@@ -14,6 +14,7 @@ import mx.uam.ayd.proyecto.presentacion.HU04FormularioMarketing.ControlFormulari
 import mx.uam.ayd.proyecto.presentacion.Eventos.ControlEventos;
 import mx.uam.ayd.proyecto.presentacion.HU_06.ControladorOrdenesPendientes;
 import mx.uam.ayd.proyecto.presentacion.HU_07.ControladorEscaner;
+import mx.uam.ayd.proyecto.presentacion.HU_01_AltaProducto.ControladorAltaProducto;
 
 @Component
 public class controladorPrincipal {
@@ -26,6 +27,7 @@ public class controladorPrincipal {
     private final ControlFormularioMarketing controlFormularioMarketing;
     private final ControlEventos controlEventos;
     private final ControladorOrdenesPendientes controladorOrdenes;
+    private final ControladorAltaProducto controladorAltaProducto;
 
     private Cliente sesionActiva;
 
@@ -33,7 +35,7 @@ public class controladorPrincipal {
     public controladorPrincipal(controladorCatalogoMezicuil controlTiendaLinea, vistaPrincipal ventanPrincipal,
             ServicioCliente servicioCliente, ControlFormularioMarketing controlFormularioMarketing,
             ControlEventos controlEventos, ControladorOrdenesPendientes controladorOrdenes,
-            ServicioOrdenDeCompra servicioOrden, ControladorEscaner controladorEscaner) {
+            ServicioOrdenDeCompra servicioOrden, ControladorEscaner controladorEscaner, ControladorAltaProducto controladorAltaProducto) {
         this.controlTiendaLinea = controlTiendaLinea;
         this.ventanaPrincipal = ventanPrincipal;
         this.servicioCliente = servicioCliente;
@@ -42,6 +44,7 @@ public class controladorPrincipal {
         this.controladorOrdenes = controladorOrdenes;
         this.servicioOrden = servicioOrden;
         this.controladorEscaner = controladorEscaner;
+        this.controladorAltaProducto = controladorAltaProducto;
     }
 
     // inicializamos la ventana
@@ -56,6 +59,10 @@ public class controladorPrincipal {
 
     public void visitaTiendaLinea() {
         controlTiendaLinea.inicia();
+    }
+
+    public void revisarInventario(){
+        controladorAltaProducto.inicia();
     }
 
     public void Eventos() {

@@ -3,15 +3,19 @@ package mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicu
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//GEnerado por IA
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
+import mx.uam.ayd.proyecto.conffigPD.GestionEscena;
 import mx.uam.ayd.proyecto.negocio.servicioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.controladorDetallesProductoAgregarCarrito;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.vistaDetallesProductoAgregarCarrito;
 import mx.uam.ayd.proyecto.presentacion.SerBot.ControladorBot;
+//GEnerado por IA
+import mx.uam.ayd.proyecto.presentacion.VolverAlCatalogoEvent;
 
 /**
  * controladorCatalogoMezicuil
@@ -27,7 +31,6 @@ public class controladorCatalogoMezicuil {
 
     private final ControladorBot ctrlBot;
 
-    @Autowired
     public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto, controladorDetallesProductoAgregarCarrito controlDetalles, ControladorBot ctrl){
         this.controlDetalles = controlDetalles;
         this.vistaDetallesProducto = vistaDetallesProducto;
@@ -46,6 +49,15 @@ public class controladorCatalogoMezicuil {
     public void inicia(){
         List<Producto> prod = servicioProducto.obtenerProductosDisponibles();
         vistaCatalogo.muestra(prod);
+    }
+
+    //GEnerado por IA
+    @EventListener
+    //GEnerado por IA
+    public void regresarAlCatalogo(VolverAlCatalogoEvent event){
+        //GEnerado por IA
+        inicia();
+        //GEnerado por IA
     }
 
     public void validarCriterio(String criterio){
@@ -78,7 +90,7 @@ public class controladorCatalogoMezicuil {
     //redireccion a los detalles de producto
     public void detallesProductoSeleccionado(Producto p){
         System.out.println("el producto trabajando " + p);
-        vistaDetallesProducto.muestraDetallesProd(p);
+        vistaDetallesProducto.muestraDetallesProd(p, GestionEscena.getInstEscena().getStage());
     }
 
 

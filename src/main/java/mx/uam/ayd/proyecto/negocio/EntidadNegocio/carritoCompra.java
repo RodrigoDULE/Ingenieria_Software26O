@@ -24,6 +24,7 @@ public class carritoCompra {
     private int cantidadTotalCompra;//Unidades compradas
     private float totalCalculado;//precio total a pagar
     private boolean envioGratis = false;
+    private boolean estado = false;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idCompra")
@@ -35,24 +36,33 @@ public class carritoCompra {
     @ManyToMany(targetEntity = Producto.class, fetch = FetchType.EAGER)
     private List<Producto> producto = new ArrayList<>();
 
-    @OneToMany(targetEntity = Producto.class, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "car", targetEntity = IntermediaCarritoProd.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IntermediaCarritoProd> interCar;
 
     // tiene que llevar metodos para calcular el precio total
     
 
     public long getid() {return idCarrito;}
+    public long getIdCarrito() {return idCarrito;}
     public List<Producto> getProductos(){return producto;}
     public int getCantidadTotalCompra() {return cantidadTotalCompra;}
     public float getTotalCalculado() {return totalCalculado;}
     public List<Producto> getProductoenCarrito(){return producto;}
-    public boolean getenvioGratis(){return envioGratis;}
-    public Compra getCompra(){return compra;}
+    public boolean getenvioGratis(){ validarEnvioGratis(); return envioGratis;}
+    public boolean isEnvioGratis(){ validarEnvioGratis(); return envioGratis;}
+    public boolean getEstado(){ return estado;}
+    public Compra getCompra(){ return compra;}
+    public List<IntermediaCarritoProd> getInterCar(){return interCar;}
     //Creamos setters
     public void setIdCarrito(long idCarrito) {this.idCarrito = idCarrito;}
     public void setCantidadTotalCompra(int cantidadTotalCompra) {this.cantidadTotalCompra += cantidadTotalCompra; }//para que se vayan sumando a los demas producto que agregamos}
     public void setTotalCalculado(float totalCalculado) {this.totalCalculado += totalCalculado;}
     public void setCompra(Compra compra) {this.compra = compra;}
+    public void setProductos(List<Producto> productos) {this.producto = productos;}
+    public void setInterCar(List<IntermediaCarritoProd> interCar) {this.interCar = interCar;}
+    public void setEnvioGratis(boolean envioGratis) {this.envioGratis = envioGratis;}
+    public void setenvioGratis(boolean envioGratis) {setEnvioGratis(envioGratis);}
+    public void setEstado(boolean estado) {this.estado = estado;}
     // public void setProducto(Producto producto) {this.producto.add(producto);}//solo agrega un producto a la vez    }
   
   
@@ -77,9 +87,6 @@ public class carritoCompra {
 
     public boolean removerProducto(Producto prod, int cantidad){
         if(producto.contains(prod)){
-            //Añadimos los articulos a los disponibles dentro del stock
-            prod.setcantidadStock(prod.getcantidadStock() + cantidad);
-
             //removemos el producto del carrito y recalculamos el total a pagar
             producto.remove(prod);
             setTotalCalculado(-prod.getPrecio()*cantidad);
@@ -89,4 +96,15 @@ public class carritoCompra {
         return false;
     }
 
+
+    public boolean vaciarCarrito(){
+        if(producto.isEmpty()){
+            return false;
+        }
+
+        setEstado(true);
+        producto.clear();
+
+        return true;
+    }
 }

@@ -1,16 +1,21 @@
 package mx.uam.ayd.proyecto.presentacion.Eventos;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import javafx.scene.control.Label;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -34,7 +39,7 @@ public class VistaEventos {
     private Button btnCalendario;
 
     @FXML
-    private FlowPane contenedorEventos;
+    private ListView<Evento> listaEventos;
 
     public void setControlador(ControlEventos controlador) {
         this.controlador = controlador;
@@ -48,49 +53,13 @@ public class VistaEventos {
 
         inicializarUI();
 
-        if (contenedorEventos != null) {
-            contenedorEventos.getChildren().clear();
-
+        if (listaEventos != null) {
+            listaEventos.getItems().clear();
             if (event != null) {
-                for (Evento e : event) {
-
-                    VBox tarjeta = new VBox(5);
-                    tarjeta.getStyleClass().add("event-card");
-
-                    Label nombre = new Label(e.getNombreEvento());
-                    nombre.getStyleClass().add("titulo-evento");
-
-                    Label lugar = new Label("Lugar: " + e.getLugar());
-
-                    Label comision = new Label("Comisión: $" + e.getComision());
-
-                    Label asistentes = new Label("Asistentes: " + e.getNoAsistentes());
-
-                    Label fecha = new Label("Fecha: " + e.getFechaE());
-
-                    Label horario = new Label(
-                            "Horario: " + e.getHoraIn() + " - " + e.getHoraFin());
-
-                    Label notificacion = new Label(
-                            "Notificación: " + e.getNotificacion());
-
-                    Label tipoEvento = new Label("Tipo de Evento: " + e.getTipoEvento());
-
-                    Label acuerdoEconomico = new Label("Acuerdo Económico: " + e.getAcuerdoEconomico());
-
-                    tarjeta.getChildren().addAll(
-                            nombre,
-                            lugar,
-                            comision,
-                            asistentes,
-                            fecha,
-                            horario,
-                            notificacion,
-                            tipoEvento,
-                            acuerdoEconomico);
-
-                    contenedorEventos.getChildren().add(tarjeta);
-                }
+                List<Evento> ordenados = new ArrayList<>(event);
+                ordenados.sort(Comparator.comparing(Evento::getFechaE,
+                        Comparator.nullsLast(Comparator.naturalOrder())));
+                listaEventos.getItems().setAll(ordenados);
             }
         }
 
@@ -117,10 +86,10 @@ public class VistaEventos {
 
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/fxml/ventana-Eventos.fxml"));
-
             loader.setController(this);
 
             Pane root = loader.load();
+            configurarLista();
 
             scene = new Scene(root);
             stage.setScene(scene);
@@ -132,10 +101,44 @@ public class VistaEventos {
         }
     }
 
+    private void configurarLista() {
+        listaEventos.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(Evento e, boolean empty) {
+                super.updateItem(e, empty);
+                if (empty || e == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                Label titulo = new Label(e.getNombreEvento());
+                titulo.getStyleClass().add("titulo-evento");
+
+                GridPane datos = new GridPane();
+                datos.setHgap(40);
+                datos.setVgap(4);
+                datos.addRow(0,
+                        new Label("Lugar: " + e.getLugar()),
+                        new Label("Fecha: " + e.getFechaE()),
+                        new Label("Horario: " + e.getHoraIn() + " - " + e.getHoraFin()));
+                datos.addRow(1,
+                        new Label("Tipo: " + e.getTipoEvento()),
+                        new Label("Acuerdo: " + e.getAcuerdoEconomico()),
+                        new Label("Asistentes: " + e.getNoAsistentes()));
+                datos.addRow(2,
+                        new Label("Comisión: $" + e.getComision()),
+                        new Label("Notificación: " + e.getNotificacion()));
+
+                VBox tarjeta = new VBox(6, titulo, datos);
+                tarjeta.setPadding(new Insets(8));
+                setGraphic(tarjeta);
+            }
+        });
+    }
+
     @FXML
     private void abrirAgendarEvento() {
         controlador.abrirAgendarEvento();
-
     }
 
     @FXML

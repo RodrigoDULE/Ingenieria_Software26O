@@ -1,6 +1,5 @@
 package mx.uam.ayd.proyecto.negocio;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,6 @@ public class servicioCarritoCompra {
     private final repositorioCliente repoCliente;
     private final repositorioProducto repositorioProd;
     private final repositorioIntermedioCarrito repoInter;
-    private int sobrantes;
 
     // Añadimos ambos repositorios al constructor
     public servicioCarritoCompra(repositoriocarritoCompra repoCarrito, repositorioCliente repoCliente,
@@ -32,83 +30,19 @@ public class servicioCarritoCompra {
         this.repoInter = repoInter;
     }
 
-    /*
-     * public boolean agregarItem(Producto producto, int cantidad) {
-     * // verificamos si el cliente cuenta con un carrito de compra
-     * // recuperamos al cliente con el Id, va a carrito ----
-     * // carritoCompra----idCarrito
-     * Cliente dueño =
-     * repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
-     * sobrantes = 0;
-     * 
-     * if (producto.getcantidadStock() <= cantidad) {
-     * return false;
-     * }
-     * 
-     * if (dueño.getCarritoCompra() == null) {
-     * System.out.println("No tiene carrito, creando carrito");
-     * carritoCompra nuevo = new carritoCompra();
-     * // agreamos producto dentro del carrito
-     * nuevo.setProducto(producto);
-     * // agregamos la cantidad total de unidades del mismmo producto
-     * nuevo.setCantidadTotalCompra(cantidad);
-     * // agregamos precio total
-     * float total = producto.getPrecio() * cantidad;
-     * nuevo.setTotalCalculado(total);
-     * 
-     * dueño.setcarritoCompra(nuevo);
-     * // decrementamos los productos en existencia
-     * sobrantes = producto.getcantidadStock() - cantidad;
-     * producto.setcantidadStock(sobrantes);
-     * // agregamos las unidades que el clietne quiere del producto
-     * repoCarrito.save(nuevo); // dara error si no lo ponemos ya que el id del
-     * carrito dentro de usuario es
-     * // unicamente una refererncia y apuntaria a null
-     * // guardamos al dueño con la referencia del carrito
-     * repoCliente.save(dueño);
-     * // actualizamos la cantidad dentro de stock;
-     * repositorioProd.save(producto);
-     * return true;
-     * }
-     * 
-     * 
-     * System.out.println("Ya tiene carrito, guardando");
-     * carritoCompra posee = dueño.getCarritoCompra(); // recuperamos el carrito que
-     * ya tiene el dueño
-     * 
-     * if(!posee.setProducto(producto)){
-     * return false;
-     * }
-     * posee.setCantidadTotalCompra(cantidad);
-     * // calculamos total de compra
-     * float total = producto.getPrecio() * cantidad;
-     * posee.setTotalCalculado(total);
-     * dueño.setcarritoCompra(posee);
-     * // decrementamos los productos en existencia
-     * sobrantes = producto.getcantidadStock() - cantidad;
-     * producto.setcantidadStock(sobrantes);
-     * // agregamos las unidades que el clietne quiere del producto
-     * repositorioProd.save(producto);
-     * // guardamos el carrito y el el cliente con se carrito actualizado
-     * repoCarrito.save(posee);
-     * repoCliente.save(dueño);
-     * 
-     * return true;
-     * 
-     * }
-     */
-
     public boolean agregarItem(Producto producto, int cantidad) {
 
         Cliente dueño = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
         IntermediaCarritoProd inter = new IntermediaCarritoProd();
-        sobrantes = 0;
 
-        if (producto.getcantidadStock() <= cantidad) {
+        if (producto.getcantidadStock() < cantidad || producto.getcantidadStock() == 0) {
             return false;
         }
 
-        if (dueño.getCarritoCompra() == null) {
+        // si el dueño no tiene carrito o si su carrito ha sido pagado anteriormente, se
+        // le asigna uno nuevo
+        if (dueño.getCarritoCompra() == null || dueño.getCarritoCompra().getEstado() == true) {
+
             System.out.println("No tiene carrito, creando carrito");
             carritoCompra nuevo = new carritoCompra();
             // agregamos producto a carrito
@@ -128,8 +62,12 @@ public class servicioCarritoCompra {
             // le asignamos al dueño su carrito activo
             dueño.setcarritoCompra(nuevo);
             // decrementamos las unidades del producto
-            sobrantes = producto.getcantidadStock() - cantidad;
-            producto.setcantidadStock(sobrantes);
+            /*
+             * LAs cantidades se descuentan cuando el cliente realiza la compra, en otro
+             * caso, el stock del producto se quedaria vacio demasiado pronto
+             * sobrantes = producto.getcantidadStock() - cantidad;
+             * producto.setcantidadStock(sobrantes);
+             */
             repoCarrito.save(nuevo);
             repoCliente.save(dueño);
             repositorioProd.save(producto);
@@ -150,9 +88,10 @@ public class servicioCarritoCompra {
         float total = producto.getPrecio() * cantidad;
         posee.setTotalCalculado(total);
         dueño.setcarritoCompra(posee);
+
         // decrementamos los productos en existencia
-        sobrantes = producto.getcantidadStock() - cantidad;
-        producto.setcantidadStock(sobrantes);
+        // sobrantes = producto.getcantidadStock() - cantidad;
+        // producto.setcantidadStock(sobrantes);
 
         // ingresamos toda la informacion a la tabla intermedia
         inter.setCarrito(posee);
@@ -175,48 +114,45 @@ public class servicioCarritoCompra {
         carritoCompra car = clienteActivo.getCarritoCompra();
         if (car != null) {
             /*
-            if (car.getTotalCalculado() > 300) {
-                car.setenvioGratis(true);
-            } else {
-                car.setenvioGratis(false);
-        }
-        */
-       car.validarEnvioGratis();
-       System.out.println("El envio gratis es: " + car.getenvioGratis());
+             * if (car.getTotalCalculado() > 300) {
+             * car.setenvioGratis(true);
+             * } else {
+             * car.setenvioGratis(false);
+             * }
+             */
+            car.validarEnvioGratis();
+            System.out.println("El envio gratis es: " + car.getenvioGratis());
             return car;
         }
         return null;
     }
 
-    // Eliminar producto de carrito
-    public boolean EliminarProdCarrito(Producto prod) {
-
+    public boolean EliminarProdCarrito(Producto producto) {
+        // 1. Obtener cliente y carrito
         Cliente clienteActivo = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
-        IntermediaCarritoProd relacionEncontrada = null;
         carritoCompra car = clienteActivo.getCarritoCompra();
-        // recuperamos la tabla intermedia con el id del carrito del dueño con sesion
-        // activa
-        List<IntermediaCarritoProd> relaciones = repoInter.findByCarIdCarrito(car.getid());
-        int cantidadxUnidad = 0;
-        for (IntermediaCarritoProd inter : relaciones) {
-            if (inter.getProd() != null && inter.getProd().equals(prod)) {
-                cantidadxUnidad = inter.getCantidadTotalProd();
-                relacionEncontrada = inter;
-                break;
-            }
-        }
 
-        // si no existe relacion se retorna null
-        if (relacionEncontrada == null) {
+        // 2. Buscar el elemento dentro de la lista intermedia
+        IntermediaCarritoProd itemABorrar = car.getInterCar().stream()
+                .filter(inter -> inter.getProd().getidProducto() == producto.getidProducto()) // O usando .equals()
+                .findFirst()
+                .orElse(null);
+
+        // 3. Si no está en el carrito, retornamos false
+        if (itemABorrar == null) {
+            System.out.println("El producto no está dentro del carrito");
             return false;
         }
 
-        // 3. Eliminar la relación de la tabla intermedia
-        repoInter.delete(relacionEncontrada);
+        System.out.println("El producto está dentro. Procediendo a eliminar...");
 
-        // Quitamos el producto de la tabla
-        if (car.removerProducto(prod, cantidadxUnidad)) {
-
+        // 4. AL REMOVERLO DE LA LISTA: orphanRemoval = true hace el DELETE en la BD
+        // automáticamente
+        if (car.removerProducto(producto, itemABorrar.getCantidadTotalProd())) {
+            car.getInterCar().remove(itemABorrar);
+            car.setCantidadTotalCompra(-1);
+            // 5. Guardamos el estado actualizado del carrito (o cliente)
+            repoCliente.save(clienteActivo);
             repoCarrito.save(car);
             return true;
         }
@@ -228,7 +164,7 @@ public class servicioCarritoCompra {
         Cliente dueño = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
         return dueño;
     }
-    
+
     public carritoCompra recuperaCarritoPorCliente(long idCliente) {
         Cliente cliente = repoCliente.findByIdCliente(idCliente);
         if (cliente == null) {
@@ -236,7 +172,7 @@ public class servicioCarritoCompra {
         }
         return cliente.getCarritoCompra();
     }
-    
+
     /**
      * Recupera el total calculado del carrito asociado al cliente indicado.
      *

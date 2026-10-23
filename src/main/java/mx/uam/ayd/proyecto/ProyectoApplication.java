@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,9 +15,12 @@ import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
 import mx.uam.ayd.proyecto.datos.RepositorioEvento;
+import mx.uam.ayd.proyecto.datos.RepositorioDirecciones;
 import mx.uam.ayd.proyecto.datos.RepositorioEmpleado;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Empleado;
 
@@ -39,16 +43,18 @@ public class ProyectoApplication {
 	private final repositorioCliente repositorioCliente;
 	private final RepositorioEvento repositorioEvento;
 	private final RepositorioEmpleado repositorioEmpleado;
+	private final RepositorioDirecciones repositorioDirecciones;
 
 	@Autowired
 	public ProyectoApplication(controladorPrincipal controlPrincipal, repositorioProducto repositorioProd,
 			repositorioCliente repositorioCliente, RepositorioEvento repositorioEvento,
-			RepositorioEmpleado repositorioEmpleado) {
+			RepositorioEmpleado repositorioEmpleado, RepositorioDirecciones repositorioDirecciones) {
 		this.controlPrincipal = controlPrincipal;
 		this.repositorioProd = repositorioProd;
 		this.repositorioCliente = repositorioCliente;
 		this.repositorioEvento = repositorioEvento;
 		this.repositorioEmpleado = repositorioEmpleado;
+		this.repositorioDirecciones = repositorioDirecciones;
 	}
 
 	/**
@@ -106,12 +112,21 @@ public class ProyectoApplication {
 	}
 
 	public void inicializaBDUsaurio() {
-		repositorioCliente.save(new Cliente("Valeria", 20));
-		repositorioCliente.save(new Cliente("Jose", 21));
-		repositorioCliente.save(new Cliente("Leonardo", 23));
-		repositorioCliente.save(new Cliente("Jean", 22));
-		repositorioCliente.save(new Cliente("Rodrigo", 27));
-		repositorioCliente.save(new Cliente("Humberto", 40));
+		DatosDireccion dat = new DatosDireccion("null"," null"," null", "null"," null"," null"," null");
+		Cliente user = new Cliente("Predeterminado", 25, null);
+
+		repositorioCliente.save(new Cliente("Valeria", 20, null));
+		repositorioCliente.save(new Cliente("Jose", 21, null));
+		repositorioCliente.save(new Cliente("Leonardo", 23, null));
+		repositorioCliente.save(new Cliente("Jean", 22, null));
+		repositorioCliente.save(new Cliente("Rodrigo", 27, null));
+		repositorioCliente.save(new Cliente("Humberto", 40, null));
+
+		user = repositorioCliente.save(user);
+		DireccionEnvio direccionEnvio = new DireccionEnvio(dat, user);
+		direccionEnvio = repositorioDirecciones.save(direccionEnvio);
+		user.setDireccionPredeterminada(direccionEnvio);
+		repositorioCliente.save(user);
 	}
 
 	/**
