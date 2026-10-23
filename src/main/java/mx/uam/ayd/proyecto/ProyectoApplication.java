@@ -121,6 +121,9 @@ public class ProyectoApplication {
 		repositorioCliente.save(new Cliente("Jean", 22, null));
 		repositorioCliente.save(new Cliente("Rodrigo", 27, null));
 		repositorioCliente.save(new Cliente("Humberto", 40, null));
+		repositorioCliente.save(new Cliente("Alejandro", 25, null));
+		repositorioCliente.save(new Cliente("Mariel", 25, null));
+		repositorioCliente.save(new Cliente("Marco", 25, null));
 
 		user = repositorioCliente.save(user);
 		DireccionEnvio direccionEnvio = new DireccionEnvio(dat, user);
