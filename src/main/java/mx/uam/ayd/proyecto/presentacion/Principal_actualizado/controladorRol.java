@@ -30,12 +30,11 @@ public class controladorRol {
 
     
     // perfil Administrador: entra directo al panel principal con todas las opciones
-    /* 
+    
     public void ingresaComoAdministrador() {
         vista.cierra();
-        controlPrincipal.iniciaAdministrador();
     }
-*/
+
     // perfil Cliente: pasa por la ventana principal donde ingresa su usuario
     public void ingresaComoCliente() {
         vista.cierra();
