@@ -18,10 +18,12 @@ public class Administrador {
 
     private String nombre;
     private String contraseña;
+    private int edad; 
 
-    public Administrador(String nombre, String contraseña){
+    public Administrador(String nombre, int edad, String contraseña){
         this.nombre = nombre;
         this.contraseña = contraseña;
+        this.edad = edad;
     }
 
 
@@ -35,6 +37,7 @@ public class Administrador {
     public void setNombre(String nombre){this.nombre = nombre;}
     public String getContraseña(){return contraseña;}
     public void setContraseña(String contraseña){this.contraseña = contraseña;} 
-
+    public int getEdad(){return edad;}
+    public void setEdad(int edad){this.edad = edad;}
 
 }

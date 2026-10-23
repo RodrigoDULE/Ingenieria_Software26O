@@ -23,6 +23,9 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Empleado;
+import mx.uam.ayd.proyecto.datos.repositorioAdmin;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Administrador;
+
 
 import mx.uam.ayd.proyecto.presentacion.Principal.controladorPrincipal;
 
@@ -44,17 +47,19 @@ public class ProyectoApplication {
 	private final RepositorioEvento repositorioEvento;
 	private final RepositorioEmpleado repositorioEmpleado;
 	private final RepositorioDirecciones repositorioDirecciones;
+	private final repositorioAdmin repositorioAdmin;
 
 	@Autowired
 	public ProyectoApplication(controladorPrincipal controlPrincipal, repositorioProducto repositorioProd,
 			repositorioCliente repositorioCliente, RepositorioEvento repositorioEvento,
-			RepositorioEmpleado repositorioEmpleado, RepositorioDirecciones repositorioDirecciones) {
+			RepositorioEmpleado repositorioEmpleado, RepositorioDirecciones repositorioDirecciones, repositorioAdmin repositorioAdmin) {
 		this.controlPrincipal = controlPrincipal;
 		this.repositorioProd = repositorioProd;
 		this.repositorioCliente = repositorioCliente;
 		this.repositorioEvento = repositorioEvento;
 		this.repositorioEmpleado = repositorioEmpleado;
 		this.repositorioDirecciones = repositorioDirecciones;
+		this.repositorioAdmin = repositorioAdmin;
 	}
 
 	/**
@@ -104,6 +109,7 @@ public class ProyectoApplication {
 	public void inicia() {
 		inicializaBD();
 		inicializaBDUsaurio();
+		inicializaBDAdmin();
 
 		// Make sure controllers are created on JavaFX thread
 		Platform.runLater(() -> {
@@ -130,6 +136,22 @@ public class ProyectoApplication {
 		direccionEnvio = repositorioDirecciones.save(direccionEnvio);
 		user.setDireccionPredeterminada(direccionEnvio);
 		repositorioCliente.save(user);
+	}
+
+
+	public void inicializaBDAdmin() {
+		Administrador admin = new Administrador("Predeterminado", 25, null);
+
+		repositorioAdmin.save(new Administrador("Leonardo", 22, null));
+		repositorioAdmin.save(new Administrador("Rodrigo", 21, null));
+		repositorioAdmin.save(new Administrador("Mariel", 25, null));
+		repositorioAdmin.save(new Administrador("Jean", 23, null));
+		repositorioAdmin.save(new Administrador("Humberto", 40, null));
+		repositorioAdmin.save(new Administrador("Alejandro", 25, null));
+		repositorioAdmin.save(new Administrador("Marco", 25, null));
+
+		admin = repositorioAdmin.save(admin);
+		repositorioAdmin.save(admin);
 	}
 
 	/**
