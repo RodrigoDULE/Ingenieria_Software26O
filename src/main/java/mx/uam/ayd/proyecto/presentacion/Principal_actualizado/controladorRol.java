@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
-import mx.uam.ayd.proyecto.presentacion.Principal.controladorPrincipal;
+import mx.uam.ayd.proyecto.presentacion.Principal_actualizado.controlador_sesion_admin;
+import mx.uam.ayd.proyecto.presentacion.Principal_actualizado.controlador_sesion_usuario;
 
 @Component
 public class controladorRol {

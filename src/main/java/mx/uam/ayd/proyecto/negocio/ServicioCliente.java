@@ -21,4 +21,15 @@ public class ServicioCliente {
         }
         return repoCliente.findByNombre(Nombre);
     }
+
+    public Cliente dameCliente2(String Nombre, String Contraseña){
+        if(repoCliente.findByNombreAndContraseña(Nombre, Contraseña) == null){
+            return null;
+        }
+        return repoCliente.findByNombreAndContraseña(Nombre, Contraseña);
+
+
+    }
+
+
 }
