@@ -10,12 +10,15 @@ import mx.uam.ayd.proyecto.presentacion.Principal.controladorPrincipal;
 public class controladorRol {
 
     private final vistaRol vista;
-    private final controladorPrincipal controlPrincipal;
+    private final controlador_sesion_admin controlSesionAdmin;
+    private final controlador_sesion_usuario controlSesionUsuario;
+
 
     @Autowired
-    public controladorRol(vistaRol vista, controladorPrincipal controlPrincipal) {
+    public controladorRol(vistaRol vista, controlador_sesion_admin controlSesionAdmin, controlador_sesion_usuario controlSesionUsuario) {
         this.vista = vista;
-        this.controlPrincipal = controlPrincipal;
+        this.controlSesionAdmin = controlSesionAdmin;
+        this.controlSesionUsuario = controlSesionUsuario;
     }
 
     @PostConstruct
@@ -33,11 +36,12 @@ public class controladorRol {
     
     public void ingresaComoAdministrador() {
         vista.cierra();
+        controlSesionAdmin.inicia();
     }
 
     // perfil Cliente: pasa por la ventana principal donde ingresa su usuario
     public void ingresaComoCliente() {
         vista.cierra();
-        controlPrincipal.inicia();
+        //controlSesionUsuario.inicia();
     }
 }

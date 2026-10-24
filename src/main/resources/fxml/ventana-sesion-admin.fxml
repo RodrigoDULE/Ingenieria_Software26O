@@ -86,7 +86,7 @@
             <Font name="Serif Bold" size="13.0" />
          </font>
       </Text>
-      <TextField fx:id="ingresarUsuario1" layoutX="47.0" layoutY="132.0" prefHeight="26.0" prefWidth="240.0" />
+      <TextField fx:id="ingresarContrasena" layoutX="47.0" layoutY="132.0" prefHeight="26.0" prefWidth="240.0" />
       <Button fx:id="ingresarFormularioMarketing1" layoutX="48.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: #d9f4ff;" text="Gestion de Inventario">
          <font>
             <Font name="Serif Bold" size="14.0" />
