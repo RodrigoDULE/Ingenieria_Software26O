@@ -55,25 +55,28 @@ public class vista_sesion_usuario {
             return;
         }
 
-        // Create UI only if we're on JavaFX thread
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::inicializarUI);
             return;
         }
 
         try {
-            stage = new Stage();
-            stage.setTitle("Mi Aplicación");
+            java.net.URL fxml = getClass().getResource("/fxml/ventana-sesion-usuario.fxml");
+            if (fxml == null) {
+                System.err.println("No se encontró /fxml/ventana-sesion-usuario.fxml");
+                return;
+            }
+        
 
-            // Load FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-sesion-usuario.fxml"));
+            stage = new Stage();
+            stage.setTitle("Portal Mezicuil");
+
+            FXMLLoader loader = new FXMLLoader(fxml);
             loader.setController(this);
-            Scene scene = new Scene(loader.load(), 600, 450);
-            // scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
-            stage.setScene(scene);
+            stage.setScene(new Scene(loader.load(), 600, 450));
 
             Initialized = true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

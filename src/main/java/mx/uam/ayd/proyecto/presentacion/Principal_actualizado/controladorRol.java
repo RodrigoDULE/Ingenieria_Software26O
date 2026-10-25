@@ -45,6 +45,6 @@ public class controladorRol {
     // perfil Cliente: pasa por la ventana principal donde ingresa su usuario
     public void ingresaComoCliente() {
         vista.cierra();
-        //controlSesionUsuario.inicia();
+        controlSesionUsuario.inicia();
     }
 }
