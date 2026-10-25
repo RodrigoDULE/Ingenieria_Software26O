@@ -27,7 +27,7 @@ import mx.uam.ayd.proyecto.datos.repositorioAdmin;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Administrador;
 
 
-import mx.uam.ayd.proyecto.presentacion.Principal.controladorPrincipal;
+import mx.uam.ayd.proyecto.presentacion.Principal_actualizado.controladorRol;
 
 /**
  * 
@@ -41,7 +41,7 @@ import mx.uam.ayd.proyecto.presentacion.Principal.controladorPrincipal;
 @SpringBootApplication
 public class ProyectoApplication {
 
-	private final controladorPrincipal controlPrincipal;
+	private final controladorRol controladorRol;
 	private final repositorioProducto repositorioProd;
 	private final repositorioCliente repositorioCliente;
 	private final RepositorioEvento repositorioEvento;
@@ -50,10 +50,10 @@ public class ProyectoApplication {
 	private final repositorioAdmin repositorioAdmin;
 
 	@Autowired
-	public ProyectoApplication(controladorPrincipal controlPrincipal, repositorioProducto repositorioProd,
+	public ProyectoApplication(controladorRol controladorRol, repositorioProducto repositorioProd,
 			repositorioCliente repositorioCliente, RepositorioEvento repositorioEvento,
 			RepositorioEmpleado repositorioEmpleado, RepositorioDirecciones repositorioDirecciones, repositorioAdmin repositorioAdmin) {
-		this.controlPrincipal = controlPrincipal;
+		this.controladorRol = controladorRol;
 		this.repositorioProd = repositorioProd;
 		this.repositorioCliente = repositorioCliente;
 		this.repositorioEvento = repositorioEvento;
@@ -113,7 +113,7 @@ public class ProyectoApplication {
 
 		// Make sure controllers are created on JavaFX thread
 		Platform.runLater(() -> {
-			controlPrincipal.inicia();
+			controladorRol.inicia();
 		});
 	}
 

@@ -62,7 +62,7 @@ public class vistaRol {
             stage = new Stage();
             stage.setTitle("Portal Mezicuil");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/seleccion-rol.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana_rol_principal.fxml"));
             loader.setController(this);
             Scene scene = new Scene(loader.load(), 600, 450);
             stage.setScene(scene);
