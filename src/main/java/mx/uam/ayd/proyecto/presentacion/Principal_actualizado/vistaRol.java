@@ -44,26 +44,27 @@ public class vistaRol {
     // JavaFX llama a este metodo despues de cargar el FXML
     @FXML
     private void initialize() {
-        btnAceptar.setOnAction(event -> aceptar());
+        if (btnAceptar != null) {
+            btnAceptar.setOnAction(event -> aceptar());
+        }
     }
 
     // crea la ventana una sola vez, siempre en el hilo de JavaFX
     private void inicializarUI() {
-        if (initialized) {
-            return;
-        }
+        if (initialized) return;
 
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::inicializarUI);
             return;
-        }
+     }
 
         try {
             stage = new Stage();
             stage.setTitle("Portal Mezicuil");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana_rol_principal.fxml"));
-            loader.setController(this);
+            loader.setController(this); // Asignación manual
+        
             Scene scene = new Scene(loader.load(), 600, 450);
             stage.setScene(scene);
 
@@ -102,21 +103,23 @@ public class vistaRol {
     }
 
     // se ejecuta al presionar "Aceptar"
+    // Agrega @FXML arriba del método aceptar
+    @FXML
     private void aceptar() {
+        System.out.println("Botón Aceptar presionado"); // Mensaje de depuración en consola
+
         if (control == null) {
-            System.err.println("Error: controladorSeleccionRol no está inyectado.");
+            System.err.println("Error: controladorRol no está inyectado.");
             return;
         }
 
-        if (grupoRol.getSelectedToggle() == null) {
-            mostrarMensaje("Por favor, selecciona un perfil para continuar.");
-            return;
-        }
-
-        if (rbAdministrador.isSelected()) {
+        // Validación por si no están en ToggleGroup o se evalúan individualmente
+        if (rbAdministrador != null && rbAdministrador.isSelected()) {
             control.ingresaComoAdministrador();
-        } else {
+        } else if (rbUsuario != null && rbUsuario.isSelected()) {
             control.ingresaComoCliente();
+        } else {
+            mostrarMensaje("Por favor, selecciona un perfil para continuar.");
         }
     }
 

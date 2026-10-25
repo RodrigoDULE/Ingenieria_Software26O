@@ -10,7 +10,9 @@ import mx.uam.ayd.proyecto.presentacion.Principal_actualizado.controlador_sesion
 @Component
 public class controladorRol {
 
+   
     private final vistaRol vista;
+
     private final controlador_sesion_admin controlSesionAdmin;
     private final controlador_sesion_usuario controlSesionUsuario;
 

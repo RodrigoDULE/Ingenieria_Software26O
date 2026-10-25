@@ -30,7 +30,7 @@
                </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="rbUsuario" layoutX="454.0" layoutY="405.0" mnemonicParsing="false" text="Soy Cliente" textFill="WHITE" toggleGroup="$grupoRol" />
-            <Button fx:id="btnAceptar" defaultButton="true" layoutX="289.0" layoutY="430.0" mnemonicParsing="false" prefWidth="100.0" text="Aceptar" />
+               <Button fx:id="btnAceptar" defaultButton="true" layoutX="289.0" layoutY="430.0" mnemonicParsing="false" prefWidth="100.0" text="Aceptar" />
             <Label layoutX="147.0" layoutY="50.0" prefHeight="35.0" prefWidth="399.0" text="Tradicion y destilacion ansestral en barro y cobre" textFill="#f5f5f5">
                <style>-fx-font-size: 16px; -fx-font-weight: bold;</style>
             </Label>
