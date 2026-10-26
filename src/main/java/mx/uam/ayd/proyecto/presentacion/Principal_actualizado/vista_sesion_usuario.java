@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.PasswordField;
 
 @Component
 public class vista_sesion_usuario {
@@ -40,7 +41,7 @@ public class vista_sesion_usuario {
     private TextField txtOrdenId;
 
     @FXML 
-    private TextField ingresarContrasena; 
+    private PasswordField ingresarContrasena; 
 
     //@FXML
     //private Text TextoRecepcion;
@@ -162,7 +163,7 @@ public class vista_sesion_usuario {
         }
 
         if (control != null) {
-            control.buscaCliente(ingresarUsuario.getText());
+            control.buscaCliente(ingresarUsuario.getText(), ingresarContrasena.getText());
         }
     }
 

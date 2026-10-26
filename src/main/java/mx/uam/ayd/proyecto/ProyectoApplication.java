@@ -119,17 +119,17 @@ public class ProyectoApplication {
 
 	public void inicializaBDUsaurio() {
 		DatosDireccion dat = new DatosDireccion("null"," null"," null", "null"," null"," null"," null");
-		Cliente user = new Cliente("Predeterminado", 25, null);
+		Cliente user = new Cliente("Predeterminado", 25, "123");
 
-		repositorioCliente.save(new Cliente("Valeria", 20, null));
+		repositorioCliente.save(new Cliente("Valeria", 20, "123"));
 		repositorioCliente.save(new Cliente("Jose", 21, null));
-		repositorioCliente.save(new Cliente("Leonardo", 23, null));
-		repositorioCliente.save(new Cliente("Jean", 22, null));
-		repositorioCliente.save(new Cliente("Rodrigo", 27, null));
-		repositorioCliente.save(new Cliente("Humberto", 40, null));
-		repositorioCliente.save(new Cliente("Alejandro", 25, null));
-		repositorioCliente.save(new Cliente("Mariel", 25, null));
-		repositorioCliente.save(new Cliente("Marco", 25, null));
+		repositorioCliente.save(new Cliente("Leonardo", 23, "123"));
+		repositorioCliente.save(new Cliente("Jean", 22, "123"));
+		repositorioCliente.save(new Cliente("Rodrigo", 27, "123"));
+		repositorioCliente.save(new Cliente("Humberto", 40, "123"));
+		repositorioCliente.save(new Cliente("Alejandro", 25, "123"));
+		repositorioCliente.save(new Cliente("Mariel", 25, "123"));
+		repositorioCliente.save(new Cliente("Marco", 25, "123"));
 
 		user = repositorioCliente.save(user);
 		DireccionEnvio direccionEnvio = new DireccionEnvio(dat, user);
@@ -142,13 +142,13 @@ public class ProyectoApplication {
 	public void inicializaBDAdmin() {
 		Administrador admin = new Administrador("Predeterminado", 25, null);
 
-		repositorioAdmin.save(new Administrador("Leonardo", 22, null));
-		repositorioAdmin.save(new Administrador("Rodrigo", 21, null));
-		repositorioAdmin.save(new Administrador("Mariel", 25, null));
-		repositorioAdmin.save(new Administrador("Jean", 23, null));
-		repositorioAdmin.save(new Administrador("Humberto", 40, null));
-		repositorioAdmin.save(new Administrador("Alejandro", 25, null));
-		repositorioAdmin.save(new Administrador("Marco", 25, null));
+		repositorioAdmin.save(new Administrador("Leonardo", 22, "123"));
+		repositorioAdmin.save(new Administrador("Rodrigo", 21, "123"));
+		repositorioAdmin.save(new Administrador("Mariel", 25, "123"));
+		repositorioAdmin.save(new Administrador("Jean", 23, "123"));
+		repositorioAdmin.save(new Administrador("Humberto", 40, "123"));
+		repositorioAdmin.save(new Administrador("Alejandro", 25, "123"));
+		repositorioAdmin.save(new Administrador("Marco", 25, "123"));
 
 		admin = repositorioAdmin.save(admin);
 		repositorioAdmin.save(admin);

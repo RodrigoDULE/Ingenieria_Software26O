@@ -106,9 +106,9 @@ public class controladorPrincipal {
     // FIN hu - 7
 
 
-    public void buscaCliente(String Nombre) {
+    public void buscaCliente(String Nombre, String contrasena) {
 
-        sesionActiva = servicioCliente.dameCliente(Nombre);
+        sesionActiva = servicioCliente.dameCliente(Nombre, contrasena);
         if (sesionActiva != null) {
             // establecemos el id del usuario en el gestionCliente
             gestionCliente.getInstance().iniciarSesion(sesionActiva.getidCliente());

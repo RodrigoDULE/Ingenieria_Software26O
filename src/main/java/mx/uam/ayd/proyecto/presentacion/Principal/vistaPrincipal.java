@@ -182,7 +182,7 @@ public class vistaPrincipal {
         }
 
         if (control != null) {
-            control.buscaCliente(ingresarUsuario.getText());
+            control.buscaCliente(ingresarUsuario.getText(), null);
         }
     }
 

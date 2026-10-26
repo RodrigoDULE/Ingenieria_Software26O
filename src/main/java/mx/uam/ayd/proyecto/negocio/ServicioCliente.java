@@ -15,14 +15,8 @@ public class ServicioCliente {
         this.repoCliente = repoCliente;
     }
 
-    public Cliente dameCliente(String Nombre){
-        if(repoCliente.findByNombre(Nombre) == null){
-            return null;
-        }
-        return repoCliente.findByNombre(Nombre);
-    }
 
-    public Cliente dameCliente2(String Nombre, String Contraseña){
+    public Cliente dameCliente(String Nombre, String Contraseña){
         if(repoCliente.findByNombreAndContraseña(Nombre, Contraseña) == null){
             return null;
         }

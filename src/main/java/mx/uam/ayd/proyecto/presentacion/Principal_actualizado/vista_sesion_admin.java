@@ -11,9 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.PasswordField;
 
 @Component
 public class vista_sesion_admin {
@@ -48,7 +50,7 @@ public class vista_sesion_admin {
     private TextField txtOrdenId;
 
     @FXML 
-    private TextField ingresarContrasena; 
+    private PasswordField ingresarContrasena; 
 
     //@FXML
     //private Text TextoRecepcion;
@@ -180,15 +182,18 @@ public class vista_sesion_admin {
 
     @FXML
     private void ingresarUsuario() {
-        if (ingresarUsuario.getText().isEmpty()) {
-            mostrarMensaje("Por favor, Ingresa un usuario Válido");
+        String nombre = ingresarUsuario.getText();
+        String contrasena = ingresarContrasena.getText();
+
+        if (nombre == null || nombre.isBlank() || contrasena == null || contrasena.isBlank()) {
+            mostrarMensaje("Ingresa tu usuario y contraseña.");
             return;
         }
-
         if (control != null) {
-            control.buscaCliente(ingresarUsuario.getText());
+            control.buscaAdmin(nombre, contrasena);   // dos argumentos
         }
     }
+
 
     // mostrar mensaje
     public void mostrarMensaje(String mensaje) {

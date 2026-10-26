@@ -66,18 +66,15 @@ public class controlador_sesion_usuario {
     }
 
 
-    public void buscaCliente(String Nombre) {
 
-        sesionActiva = servicioCliente.dameCliente(Nombre);
-        if (sesionActiva != null) {
-            // establecemos el id del usuario en el gestionCliente
-            gestionCliente.getInstance().iniciarSesion(sesionActiva.getidCliente());
-            System.out.println(
-                    "EL id del usuaario que ingreso al sistema es: " + gestionCliente.getInstance().getIdActivo());
-            ventanUsuario.muestra(sesionActiva.getNombre());
-        } else {
-            ventanUsuario.mostrarMensaje("Ingresa un usuario registrado.");
-            ventanUsuario.muestra(null);
-        }
+    public void buscaCliente(String nombre, String contrasena) {
+       sesionActiva = servicioCliente.dameCliente(nombre, contrasena);
+    if (sesionActiva != null) {
+        gestionCliente.getInstance().iniciarSesion(sesionActiva.getidCliente());
+        ventanUsuario.muestra(sesionActiva.getNombre());
+    } else {
+        ventanUsuario.mostrarMensaje("Usuario o contraseña incorrectos.");
+        ventanUsuario.muestra(null);
     }
+}
 }

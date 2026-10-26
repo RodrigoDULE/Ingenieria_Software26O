@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -47,7 +48,7 @@
             <Font name="Serif Bold" size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="ingresarUsuario1" layoutX="47.0" layoutY="145.0" prefHeight="26.0" prefWidth="240.0" />
+      <PasswordField fx:id="ingresarContrasena" layoutX="47.0" layoutY="145.0" prefHeight="26.0" prefWidth="240.0" />
       <Text fill="#efffbd" layoutX="51.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa tu contraseña">
          <font>
             <Font name="Serif Bold" size="13.0" />

@@ -1,12 +1,14 @@
 package mx.uam.ayd.proyecto.presentacion.Principal_actualizado;
 
+import mx.uam.ayd.proyecto.negocio.ServicioAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
-import mx.uam.ayd.proyecto.negocio.ServicioCliente;
+
 import mx.uam.ayd.proyecto.negocio.ServicioOrdenDeCompra;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Administrador;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.OrdenDeCompra;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicuil.controladorCatalogoMezicuil;
@@ -19,7 +21,7 @@ import mx.uam.ayd.proyecto.presentacion.HU_01_AltaProducto.ControladorAltaProduc
 @Component
 public class controlador_sesion_admin {
 
-    private final ServicioCliente servicioCliente;
+    private final ServicioAdmin servicioAdmin;
     private final ServicioOrdenDeCompra servicioOrden;
     private final ControladorEscaner controladorEscaner;
     private final controladorCatalogoMezicuil controlTiendaLinea;
@@ -29,22 +31,22 @@ public class controlador_sesion_admin {
     private final ControladorOrdenesPendientes controladorOrdenes;
     private final ControladorAltaProducto controladorAltaProducto;
 
-    private Cliente sesionActiva;
+    private Administrador sesionActiva;
 
     @Autowired
     public controlador_sesion_admin(controladorCatalogoMezicuil controlTiendaLinea, vista_sesion_admin ventanAdmin,
-            ServicioCliente servicioCliente, ControlFormularioMarketing controlFormularioMarketing,
+            ControlFormularioMarketing controlFormularioMarketing,
             ControlEventos controlEventos, ControladorOrdenesPendientes controladorOrdenes,
-            ServicioOrdenDeCompra servicioOrden, ControladorEscaner controladorEscaner, ControladorAltaProducto controladorAltaProducto) {
+            ServicioOrdenDeCompra servicioOrden, ControladorEscaner controladorEscaner, ControladorAltaProducto controladorAltaProducto, ServicioAdmin servicioAdmin) {
         this.controlTiendaLinea = controlTiendaLinea;
         this.ventanAdmin = ventanAdmin;
-        this.servicioCliente = servicioCliente;
         this.controlFormularioMarketing = controlFormularioMarketing;
         this.controlEventos = controlEventos;
         this.controladorOrdenes = controladorOrdenes;
         this.servicioOrden = servicioOrden;
         this.controladorEscaner = controladorEscaner;
         this.controladorAltaProducto = controladorAltaProducto;
+        this.servicioAdmin = servicioAdmin;
     }
 
     // inicializamos la ventana
@@ -105,19 +107,18 @@ public class controlador_sesion_admin {
 
     // FIN hu - 7
 
-
-    public void buscaCliente(String Nombre) {
-
-        sesionActiva = servicioCliente.dameCliente(Nombre);
-        if (sesionActiva != null) {
-            // establecemos el id del usuario en el gestionCliente
-            gestionCliente.getInstance().iniciarSesion(sesionActiva.getidCliente());
-            System.out.println(
-                    "EL id del usuaario que ingreso al sistema es: " + gestionCliente.getInstance().getIdActivo());
-            ventanAdmin.muestra(sesionActiva.getNombre());
-        } else {
-            ventanAdmin.mostrarMensaje("Ingresa un usuario registrado.");
-            ventanAdmin.muestra(null);
-        }
+    public void buscaAdmin(String nombre, String contrasena) {
+        Administrador admin = servicioAdmin.dameAdmin(nombre, contrasena);
+        if (admin != null) {
+            sesionActiva = servicioAdmin.dameAdmin(nombre, contrasena);
+            if (sesionActiva != null) {
+                gestionCliente.getInstance().iniciarSesion(sesionActiva.getidAdmin());
+            }
+                ventanAdmin.muestra(admin.getNombre());      // aquí se activan los botones
+        }else {
+                ventanAdmin.mostrarMensaje("Usuario o contraseña incorrectos.");
+                ventanAdmin.muestra(null);                   // aquí se vuelven a bloquear
+            }
     }
+   
 }
