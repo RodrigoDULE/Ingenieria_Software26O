@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -19,7 +23,8 @@
       </Text>
       <Button fx:id="irCarrito" layoutX="908.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleIrCarrito" styleClass="primary-button" text="Ir carrito" />
       <Button id="vistaAnterior" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleVistaAnterior" styleClass="primary-button" text="Atras" />
-      <Line endX="868.0" layoutX="115.0" layoutY="517.0" startX="-100.0" stroke="#b2b2b2" />
+      
+      <!-- Contenedor principal del producto -->
       <Pane layoutX="17.0" layoutY="81.0" prefHeight="420.0" prefWidth="969.0" styleClass="panel-card">
          <children>
             <Line endX="-47.0" endY="315.0" layoutX="383.0" layoutY="90.0" startX="-47.0" startY="-80.0" stroke="#b2b2b2" styleClass="summary-card" />
@@ -44,5 +49,32 @@
             <Text fx:id="piezasDetalles" fill="#f50303" layoutX="741.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="summary-text" text="Hay 15 piezas disponibles dentro de stock" textAlignment="CENTER" wrappingWidth="159.88931274414062" />
          </children>
       </Pane>
+
+      <!-- SECCIÓN DE RESEÑAS -->
+      <Text fill="#144d03" layoutX="17.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Deja tu reseña!">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      
+      <ComboBox fx:id="comboCalificacion" layoutX="17.0" layoutY="545.0" prefHeight="25.0" prefWidth="90.0" promptText="Estrellas" />
+      <TextField fx:id="campoTituloResena" layoutX="117.0" layoutY="545.0" prefHeight="25.0" prefWidth="180.0" promptText="Título" />
+      <Button fx:id="botonPublicarResena" layoutX="307.0" layoutY="545.0" mnemonicParsing="false" onAction="#handlePublicarResena" prefHeight="25.0" prefWidth="95.0" styleClass="primary-button" text="Publicar" />
+      
+      <TextArea fx:id="campoComentarioResena" layoutX="17.0" layoutY="580.0" prefHeight="65.0" prefWidth="385.0" promptText="Escribe un comentario..." />
+
+      <!-- Título y contenedor de Opiniones del producto -->
+      <Text fill="#144d03" layoutX="430.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiniones del producto:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+
+      <ScrollPane layoutX="430.0" layoutY="545.0" prefHeight="150.0" prefWidth="556.0" fitToWidth="true">
+         <content>
+            <VBox fx:id="contenedorResenas" spacing="5.0" style="-fx-padding: 5;" />
+         </content>
+      </ScrollPane>
+      
    </children>
 </Pane>
