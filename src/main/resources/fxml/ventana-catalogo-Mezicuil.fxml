@@ -52,6 +52,7 @@
             <FlowPane fx:id="contenedorProductos" columnHalignment="CENTER" hgap="12" prefHeight="629.0" prefWidth="726.0" vgap="12" />
          </content>
       </ScrollPane>
-      <Button id="irCarrito" layoutX="665.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleIrCarrito" styleClass="primary-button" text="Ir al carrito" />
+      <Button id="irCarrito" layoutX="520.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleIrCarrito" styleClass="primary-button" text="Ir al carrito" />
+      <Button id="botonFavoritos" layoutX="625.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleMostrarFavoritos" styleClass="primary-button" text="Favoritos" />
    </children>
 </Pane>
